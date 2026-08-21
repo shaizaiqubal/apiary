@@ -1,0 +1,28 @@
+species_id,common_name,scientific_name,rarity_tier,points,fun_facts
+1,Buff-tailed bumblebee,Bombus terrestris,Common,25,UK's most widespread bumblebee. Queens can be seen flying on mild days even in winter. Colonies can number several hundred workers.
+2,White-tailed bumblebee,Bombus lucorum,Common,25,Nearly identical to the buff-tailed bumblebee but with a pure white tail instead of buff. Actually a group of very similar species that need close examination to tell apart.
+3,Red-tailed bumblebee,Bombus lapidarius,Common,25,Females are jet black with a bright orange-red tail. Often nests under stones or in old walls — the species name 'lapidarius' means 'of stones'.
+4,Common carder bee,Bombus pascuorum,Common,25,"Ginger and fluffy, with one of the longest flight seasons of any UK bumblebee, from February right through to November."
+5,Garden bumblebee,Bombus hortorum,Common,25,"Has the longest tongue of any UK bumblebee, letting it reach deep into tubular flowers like foxgloves that other bees can't access."
+6,Early bumblebee,Bombus pratorum,Common,25,"One of the first bumblebees on the wing each year, often emerging in February. Small colonies of only 50-100 workers, much smaller than other bumblebee species."
+7,Tree bumblebee,Bombus hypnorum,Common,25,"First recorded in the UK in 2001 and has since spread across most of the country. Unusually for a bumblebee, it often nests above ground in bird boxes and roof spaces."
+8,Tawny mining bee,Andrena fulva,Uncommon,45,Females are strikingly foxy-orange and dig neat volcano-shaped mounds of soil in lawns each spring — often mistaken for ant hills.
+9,Red mason bee,Osmia bicornis,Uncommon,45,One of the earliest bees to emerge each spring and a superb pollinator of fruit trees. Nests readily in hollow stems and bee hotels.
+10,Hairy-footed flower bee,Anthophora plumipes,Uncommon,45,"Fast, hovering flight makes it look like a tiny hummingbird. Males and females look completely different — males are sandy-coloured, females are all black."
+11,Ashy mining bee,Andrena cineraria,Uncommon,45,"Striking grey-and-black banded bee, sometimes nesting in large aggregations of hundreds of burrows in short grass or bare soil."
+12,Patchwork leafcutter bee,Megachile centuncularis,Uncommon,45,Cuts neat semi-circular discs from rose and other leaves to line its nest cells — the tell-tale scalloped leaf edges are a classic sign of its presence.
+13,Wool carder bee,Anthidium manicatum,Uncommon,45,"Females scrape soft plant hairs, especially from lamb's ear (Stachys), to felt into nest material. Males aggressively guard patches of flowers from rival bees."
+14,Common furrow bee,Lasioglossum calceatum,Uncommon,45,"Tiny, metallic-sheened ground-nester found almost everywhere in the UK. Some furrow bee species show early social behaviour, a step between solitary and colonial living."
+15,Yellow-legged mining bee,Andrena flavipes,Uncommon,45,"Produces two generations a year, one in spring and one in summer — unusual among mining bees, which typically fly for just a few weeks."
+16,Red-tailed mason bee,Osmia bicolor,Rare,75,"Nests inside empty snail shells, which the female then camouflages by covering with a thatch of grass and plant stems, sometimes carried some distance."
+17,Large scabious mining bee,Andrena hattorfiana,Rare,75,"One of Britain's largest mining bees. Nationally scarce and tightly linked to scabious flowers, from which females collect almost all of their pollen."
+18,Potter flower bee,Anthophora retusa,Rare,75,"A declining chalk-grassland specialist, now largely confined to a handful of sites in southern England after major losses through the 20th century."
+19,Moss carder bee,Bombus muscorum,Rare,75,"Once widespread across the UK, now mostly restricted to coastal grassland, machair, and moorland after a significant 20th-century decline."
+20,Ivy bee,Colletes hederae,Shiny,150,"HOST PLANT: ivy (Hedera helix). One of the latest bees on the wing each year, timing its whole flight period, September to November, to match ivy's autumn bloom. First recorded in Britain in 2001."
+21,Clarke's mining bee,Andrena clarkella,Shiny,150,"HOST PLANT: willow (Salix spp., including goat willow). One of the very first bees to emerge each year, often flying in late winter to catch the first willow catkins."
+22,Small scabious mining bee,Andrena marginata,Shiny,150,"HOST PLANT: devil's-bit scabious and field scabious. A UK conservation-priority species, now restricted to a small number of scabious-rich sites."
+23,Yellow loosestrife bee,Macropis europaea,Shiny,150,"HOST PLANT: yellow loosestrife. Uniquely among UK bees, collects floral oils as well as pollen from its host plant, using the oil to waterproof its underground nest cells."
+24,Harebell carpenter bee,Chelostoma campanularum,Shiny,150,"HOST PLANT: harebell and other Campanula species. Tiny, barely bigger than an ant, and almost never seen away from its host flowers."
+25,Large-headed resin bee,Heriades truncorum,Uncommon,45,"Tiny bee, only 5-5.5mm long, that builds its nest partitions entirely from pine resin. Forages mainly on yellow daisy-family flowers like ragwort and fleabane."
+26,Bellflower blunthorn bee,Melitta haemorrhoidalis,Shiny,150,"HOST PLANT: harebell and other Campanula species. Flies for a short window, mid-July to late August, exactly matching Campanula bloom time. Restricted mainly to chalk grassland and woodland rides."
+27,Chocolate mining bee,Andrena scotica,Common,25,"One of the most widespread and abundant spring mining bees in the UK, found in gardens, hedgerows, and woodland edges nearly everywhere. Forages on a wide range of spring blossom."
