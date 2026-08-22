@@ -1,8 +1,9 @@
-from fastapi import APIRouter, HTTPException, status
+from sqlalchemy.exc import IntegrityError
+from fastapi import APIRouter, HTTPException, status, Depends
 from sqlalchemy import select
 from backend.database import SessionLocal
 from backend.models import User
-
+from backend.app.dependencies import get_current_user_id
 router = APIRouter(prefix='/users',tags=["users"])
 
 def get_user_or_404(db, user_id: str) -> User:
@@ -15,15 +16,17 @@ def get_user_or_404(db, user_id: str) -> User:
         )
     return res
 
-@router.post('/register/{id}',response_model=dict)
-def register_user(id:str) -> dict:
+@router.post('/register',response_model=dict)
+def register_user(id: str = Depends(get_current_user_id)) -> dict:
     with SessionLocal() as db:
-        user = db.execute(select(User).where(User.id == id)).scalar_one_or_none()
-        if user is None:
+        try:
             user = User(id=id)
             db.add(user)
             db.commit()
             db.refresh(user)
+        except IntegrityError:
+            db.rollback()
+            user = db.execute(select(User).where(User.id == id)).scalar_one()
     return {"user_id": id, "join_date": user.join_date}
 
 @router.get('/{id}', response_model=dict)
