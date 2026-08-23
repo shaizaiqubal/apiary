@@ -12,7 +12,7 @@ api.interceptors.request.use((config) => {
 })
 
 export const registerUser = async(userId) => {
-    const response = await(api.post(`/users/register`))
+    const response = await api.post(`/users/register`)
     return response.data
 }
 
@@ -21,9 +21,35 @@ export const getPlots = async() => {
     return response.data
 }
 
-export const newPlot = async(plot) =>{
+export const getPlot = async(plotId) => {
+    const response = await api.get(`/plots/${plotId}`)
+    return response.data
+}
+
+export const newPlot = async(plot) => {
     const response = await api.post(`/plots/create`,plot)
     return response.data
+}
+
+export const getBeedex = async() => {
+    const response = await api.get(`/beedex`)
+    return response.data
+}
+export const getUserBeedex = async() => {
+    const response = await api.get(`/beedex/user`)
+    return response.data
+}
+
+export const getQuest = async(plotId) => {
+    const response = await api.get(`/quests/plot/${plotId}`)
+    return response.data
+}
+
+export const logQuest = async (formData) => {
+  const response = await api.post('/quests', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' }
+  })
+  return response.data
 }
 
 export default api
