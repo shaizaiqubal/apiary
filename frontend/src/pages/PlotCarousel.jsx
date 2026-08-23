@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { useState } from "react"
 import { getPlots } from "../api"
 import { Link } from "react-router-dom"
-import PlotCard from "../components/plotCard"
+import PlotCard from "../components/PlotCard"
 
 const PlotCarousel = () => {
 

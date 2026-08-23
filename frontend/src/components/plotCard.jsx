@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-const plotCard = ({ plot }) => {
+const PlotCard = ({ plot }) => {
     const plotMap = {1:'balcony pot',2:'small garden',3:'large garden',4:'allotment'}
     return(
         <>
@@ -10,4 +10,4 @@ const plotCard = ({ plot }) => {
     )
 }
 
-export default plotCard
+export default PlotCard
