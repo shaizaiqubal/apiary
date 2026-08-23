@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import select
+from sqlalchemy.orm import selectinload
 from backend.database import SessionLocal
 from backend.models import Plot
 from pydantic import BaseModel
@@ -31,6 +32,8 @@ def create_plot(plot: CreatePlot, user_id: str = Depends(get_current_user_id)) -
         db.add(new_plot)
         db.commit()
         db.refresh(new_plot)
+        new_plot.quests
+        new_plot.sightings
 
     return new_plot
 
@@ -39,7 +42,14 @@ def get_user_plots(user_id: str = Depends(get_current_user_id)) -> list[Plot]:
     with SessionLocal() as db:
         get_user_or_404(db, user_id)
 
-        stmt = select(Plot).where(Plot.user_id == user_id)
+        stmt = (
+            select(Plot)
+            .options(
+                selectinload(Plot.quests),
+                selectinload(Plot.sightings),
+            )
+            .where(Plot.user_id == user_id)
+        )
         res = db.execute(stmt).scalars().all()
 
     return [plot for plot in res]
@@ -49,7 +59,14 @@ def get_plot(plot_id: int, user_id: str = Depends(get_current_user_id)) -> Plot:
     with SessionLocal() as db:
         get_user_or_404(db, user_id)
 
-        stmt = select(Plot).where(Plot.id == plot_id, Plot.user_id == user_id)
+        stmt = (
+            select(Plot)
+            .options(
+                selectinload(Plot.quests),
+                selectinload(Plot.sightings),
+            )
+            .where(Plot.id == plot_id, Plot.user_id == user_id)
+        )
         res = db.execute(stmt).scalar_one_or_none()
 
     if res is None:

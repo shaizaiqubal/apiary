@@ -7,6 +7,7 @@ from backend.app.dependencies import update_milestone
 from backend.app.services.get_quests import get_plant_quests, get_nesting_quests
 from backend.app.routers.users import get_user_or_404
 from backend.app.services.verification import verify_quest
+from backend.schemas import QuestOptionsSchema
 
 router = APIRouter(prefix='/quests',tags=["quests"])
 
@@ -87,7 +88,7 @@ async def log_quest(
 
     return {"quest": quest, "result": result}
 
-@router.get('/plot/{plot_id}',response_model=dict)
+@router.get('/plot/{plot_id}', response_model=QuestOptionsSchema)
 def get_plot_quests(plot_id: int, user_id: str = Depends(get_current_user_id)) -> dict:
     with SessionLocal() as db:
         plot = db.execute(select(Plot).where(Plot.id == plot_id, Plot.user_id == user_id)).scalar_one_or_none()

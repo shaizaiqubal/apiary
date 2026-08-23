@@ -14,17 +14,6 @@ def get_beedex()-> list[Species]:
         return [species for species in res]
 
 
-@router.get("/{species_id}", response_model=SpeciesSchema)
-def get_species(species_id: int) -> Species: 
-    with SessionLocal() as db:
-        res = db.execute(select(Species).where(Species.species_id == species_id)).scalar_one_or_none()
-        if res is None:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND,
-                detail="Species Not Found"
-            )
-        return res
-
 @router.get("/user", response_model=list[SpeciesSchema])
 def get_user_beedex(user_id: str = Depends(get_current_user_id)) -> list[Species]: 
     with SessionLocal() as db:
@@ -44,9 +33,18 @@ def get_user_beedex(user_id: str = Depends(get_current_user_id)) -> list[Species
         species_list = db.execute(select(Species).where(Species.species_id.in_(unique_species_ids))).scalars().all()
 
         if not species_list:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND,
-                detail="No species found for the user"
-            )
+            return []
 
         return [species for species in species_list]
+
+
+@router.get("/{species_id}", response_model=SpeciesSchema)
+def get_species(species_id: int) -> Species: 
+    with SessionLocal() as db:
+        res = db.execute(select(Species).where(Species.species_id == species_id)).scalar_one_or_none()
+        if res is None:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="Species Not Found"
+            )
+        return res
