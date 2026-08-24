@@ -1,12 +1,13 @@
 import { useState } from "react"
 import { newPlot } from "../api"
 import { useNavigate } from "react-router-dom"
-
+import { MapContainer, TileLayer } from "react-leaflet"
+import LocationPicker from "../components/LocationPicker"
 // ADD PLOT NAME TO DB MODEL
 
 const NewPlot = () =>{
     const [plot, setPlot] = useState({latitude:'', longitude: '', sun_shade:'', plot_type: '', area_sq_m:''})
-    const [data, setData] = useState('')
+    const [coords, setCoords] = useState(null)
     const navigate = useNavigate()
 
     const numericFields = ["latitude", "longitude", "area_sq_m", "plot_type"]
@@ -21,16 +22,29 @@ const NewPlot = () =>{
 
     const handleSubmit = async (e) => {
     e.preventDefault()
-    const data = await newPlot(plot)
-    setData(data)
+    const latitude = parseFloat(coords[0])
+    const longitude = parseFloat(coords[1])
+    const updatedPlot = {... plot, ["latitude"]:latitude, ["longitude"]:longitude}
+    setPlot(updatedPlot)
+    const data = await newPlot(updatedPlot)
     console.log(data)
     navigate(`/plots`)
     }
 
     return(
         <>
+        <MapContainer 
+            center={[51.505, -0.09]}
+            zoom={13}
+            style={{ height: '300px', width: '90%' }}>
+                <TileLayer 
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
+                <LocationPicker coords={coords} setCoords={setCoords}/>
+        </MapContainer>
+
         <form onSubmit={handleSubmit}>
-            <input 
+            {/* <input 
                 type="number"
                 name="latitude"
                 value={plot.latitude}
@@ -43,7 +57,7 @@ const NewPlot = () =>{
                 value={plot.longitude}
                 onChange={handleChange}
                 placeholder="Longitude"
-            />
+            /> */}
             <input 
                 type="number"
                 name="area_sq_m"

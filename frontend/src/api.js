@@ -11,7 +11,7 @@ api.interceptors.request.use((config) => {
   return config
 })
 
-export const registerUser = async(userId) => {
+export const registerUser = async() => {
     const response = await api.post(`/users/register`)
     return response.data
 }
@@ -50,6 +50,25 @@ export const logQuest = async (formData) => {
     headers: { 'Content-Type': 'multipart/form-data' }
   })
   return response.data
+}
+
+export const logSighting = async(formData) => {
+    const response = await api.post('/sightings',formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+    })
+    return response.data
+}
+
+export const confirmSighting = async (sightingId, speciesId) => {
+    const response = await api.post(`/sightings/${sightingId}/confirm`, null, {
+        params: { species_id: speciesId }
+    })
+    return response.data
+}
+
+export const getMap = async() => {
+    const response = await api.get(`/plots/map/all`)
+    return response.data
 }
 
 export default api

@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { logQuest } from "../api"
 
-const QuestCard = ({quest, plotId}) => {
+const QuestCard = ({quest, plotId, onSubmitted}) => {
 
     const [active, setActive] = useState()
     const [image, setImage] = useState()
@@ -30,6 +30,7 @@ const QuestCard = ({quest, plotId}) => {
 
         setActive(null)
         setImage(null)
+        onSubmitted?.()
     }
 
     

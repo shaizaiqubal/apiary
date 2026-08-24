@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { getPlot, getQuest } from "../api"
 import QuestCard from "../components/QuestCard"
+import SightingOverlay from "../components/SightingOverlay"
 
 const PlotDetail = () => {
 
@@ -9,11 +10,17 @@ const PlotDetail = () => {
     const [plot, setPlot] = useState([])
     const [quest, setQuest] = useState([])
     const [showQuest, setShowQuest] = useState(false)
+    const [showSighting, setShowSighting] = useState(false)
 
     const fetchQuest = async() => {
         const data = await getQuest(plotId)
         setQuest(data)
         setShowQuest(true)
+    }
+
+    const handleQuestSubmitted = async () => {
+        const data = await getPlot(plotId)
+        setPlot(data)
     }
     
     useEffect(() => {
@@ -25,6 +32,10 @@ const PlotDetail = () => {
     }, [plotId])
 
     const plotMap = {1:'balcony pot',2:'small garden',3:'large garden',4:'allotment'}
+    const confirmedSightings = plot.sightings?.filter(
+        (sighting) => sighting.verified_status === 'confirmed'
+    ) ?? []
+
     return(
         <>
         <h3>{plotMap[plot.plot_type]}</h3>
@@ -47,9 +58,9 @@ const PlotDetail = () => {
             <p>No quests yet.</p>
         )}
         <h4>Sightings</h4>
-        {plot.sightings?.length ? (
+        {confirmedSightings.length ? (
             <ul>
-                {plot.sightings.map((sighting) => (
+            {confirmedSightings.map((sighting) => (
                     <li key={sighting.id}>
                         Species {sighting.species_id ?? 'unknown'} - {sighting.verified_status} ({sighting.points_awarded} points)
                     </li>
@@ -60,7 +71,11 @@ const PlotDetail = () => {
         )}
 
         <button onClick={fetchQuest}>Get a Quest!</button>
-        {showQuest && <QuestCard quest={quest} plotId={plotId}/>} 
+        {showQuest && <QuestCard quest={quest} plotId={plotId} onSubmitted={handleQuestSubmitted}/>} 
+
+        <button onClick={() => setShowSighting(true)}>I found a bee!</button>
+        {(showSighting) && <SightingOverlay plotId={plotId} onClose={() => setShowSighting(false)} />}
+
         </>
 
         
