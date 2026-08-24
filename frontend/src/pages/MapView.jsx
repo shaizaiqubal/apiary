@@ -28,7 +28,7 @@ const MapView = () => {
 
     return(
        <MapContainer 
-            center={[51.505, -0.09]}
+            center={center}
             zoom={13}
             style={{ height: '900px', width: '100%' }}>
 
