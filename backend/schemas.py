@@ -68,6 +68,11 @@ class QuestSchema(BaseModel):
     points_awarded: int
 
 
+class QuestLogResponse(BaseModel):
+    quest: QuestSchema
+    result: dict
+
+
 class SightingSchema(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 

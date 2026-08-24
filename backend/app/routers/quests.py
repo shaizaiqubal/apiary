@@ -7,12 +7,12 @@ from backend.app.dependencies import update_milestone
 from backend.app.services.get_quests import get_plant_quests, get_nesting_quests
 from backend.app.routers.users import get_user_or_404
 from backend.app.services.verification import verify_quest
-from backend.schemas import QuestOptionsSchema
+from backend.schemas import QuestLogResponse, QuestOptionsSchema
 
 router = APIRouter(prefix='/quests',tags=["quests"])
 
 
-@router.post("", response_model=dict)
+@router.post("", response_model=QuestLogResponse)
 async def log_quest(
     plot_id: int = Form(...),
     plant_id: int | None = Form(None),
@@ -50,16 +50,25 @@ async def log_quest(
 
         if plant_id:
             plant = db.execute(select(Plant).where(Plant.plant_id == plant_id)).scalar_one_or_none()
+            found = db.execute(select(Quest).where(Quest.plant_id==plant_id)).scalar_one_or_none()
             if plant:
                 expected = f"planting {plant.common_name or plant.plant_name}"
-                points = plant.points
+                if found:
+                    points = 5
+                else:
+                    points = plant.points
             else:
                 raise HTTPException(status_code=404, detail="Plant not found")
         else:
             action = db.execute(select(Nesting).where(Nesting.action_id == action_id)).scalar_one_or_none()
+            found = db.execute(select(Quest).where(Quest.action_id==action_id)).scalar_one_or_none()
+
             if action:
                 expected = action.action
-                points = action.points
+                if found:
+                    points = 5
+                else:
+                    points = action.points
             else:
                 raise HTTPException(status_code=404, detail="Action not found")
 
