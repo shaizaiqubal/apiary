@@ -1,10 +1,16 @@
-import { useMapEvents, Marker } from "react-leaflet"
+import { useMapEvents, useMap, Marker } from "react-leaflet";
+import { useEffect } from "react";
+
 const LocationPicker = ({ coords, setCoords }) => {
+    const map = useMap()
     useMapEvents(
         { click: (e) => setCoords([e.latlng.lat, e.latlng.lng]) }
     )
-    console.log(coords )
-    //return null
+    useEffect(() => {
+        if(coords){
+            map.setView(coords)
+        }
+    },[coords,map])
     return coords ? <Marker position={coords} /> : null
 }
 

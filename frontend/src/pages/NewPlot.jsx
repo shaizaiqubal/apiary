@@ -30,6 +30,14 @@ const NewPlot = () =>{
     console.log(data)
     navigate(`/plots`)
     }
+    const getCurrentLocation = () =>{
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const { latitude, longitude } = position.coords
+                setCoords([latitude,longitude])
+            }
+        )
+    }
 
     return(
         <>
@@ -42,22 +50,9 @@ const NewPlot = () =>{
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
                 <LocationPicker coords={coords} setCoords={setCoords}/>
         </MapContainer>
+        <button onClick={getCurrentLocation}>Get my current location</button>
 
         <form onSubmit={handleSubmit}>
-            {/* <input 
-                type="number"
-                name="latitude"
-                value={plot.latitude}
-                onChange={handleChange}
-                placeholder="Latitude"
-            />
-            <input 
-                type="number"
-                name="longitude"
-                value={plot.longitude}
-                onChange={handleChange}
-                placeholder="Longitude"
-            /> */}
             <input 
                 type="number"
                 name="area_sq_m"
