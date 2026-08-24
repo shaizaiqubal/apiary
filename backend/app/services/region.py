@@ -23,8 +23,10 @@ def hardiness_meets_bucket(plant_hardiness: str, bucket: str) -> bool:
     #True if a plant's H-rating is hardy enough to survive this bucket's winter minimum.
     if not plant_hardiness:
         return False
-    required = BUCKET_MIN_HARDINESS[bucket]
+    required = BUCKET_MIN_HARDINESS[bucket].upper()
+    plant_hardiness = plant_hardiness.upper()
+    hardiness_order = [rating.upper() for rating in HARDINESS_ORDER]
     try:
-        return HARDINESS_ORDER.index(plant_hardiness) >= HARDINESS_ORDER.index(required)
+        return hardiness_order.index(plant_hardiness) >= hardiness_order.index(required)
     except ValueError:
         return False

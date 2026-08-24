@@ -1,5 +1,5 @@
 from uuid import UUID
-from sqlalchemy import select
+from sqlalchemy import func, select
 from fastapi import Header, HTTPException, status
 from backend.models import Plot, PlotMilestone
 import hashlib
@@ -44,11 +44,16 @@ def update_milestone(plot_id: int, user_id: str, db) -> bool:
     cur_points = plot.points
 
     current_milestone = db.execute(
-        select(PlotMilestone).where(PlotMilestone.milestone == plot.milestone)
+        select(PlotMilestone).where(
+            func.lower(PlotMilestone.milestone) == func.lower(plot.milestone)
+        )
     ).scalar_one_or_none()
 
     if not current_milestone:
         raise HTTPException(status_code=404, detail="Current plot milestone not found")
+
+    if plot.milestone != current_milestone.milestone:
+        plot.milestone = current_milestone.milestone
 
     next_milestone = db.execute(
         select(PlotMilestone).where(
