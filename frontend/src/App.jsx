@@ -6,7 +6,6 @@ import MapView from './pages/MapView'
 import NewPlot from './pages/NewPlot'
 import PlotCarousel from './pages/PlotCarousel'
 import PlotDetail from './pages/PlotDetail'
-import Register from './pages/Register'
 
 import './App.css'
 
@@ -20,7 +19,6 @@ function App() {
       <Route path ="/plots" element= {<PlotCarousel/>} />
       <Route path ="/plot/new" element= {<NewPlot/>} />
       <Route path ="/plot/:plotId" element= {<PlotDetail/>} />
-      <Route path ="/register" element= {<Register/>} />
     </Routes>
   </BrowserRouter>
   

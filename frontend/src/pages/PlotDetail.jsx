@@ -38,7 +38,8 @@ const PlotDetail = () => {
 
     return(
         <>
-        <h3>{plotMap[plot.plot_type]}</h3>
+        <h3>{plot.plot_name}</h3>
+        <p>type: {plotMap[plot.plot_type]}</p>
         <p>latitude: {plot.latitude}</p>
         <p>longitude: {plot.longitude}</p>
         <p>sun: {plot.sun_shade}</p>

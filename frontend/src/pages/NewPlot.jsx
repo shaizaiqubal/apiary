@@ -3,10 +3,9 @@ import { newPlot } from "../api"
 import { useNavigate } from "react-router-dom"
 import { MapContainer, TileLayer } from "react-leaflet"
 import LocationPicker from "../components/LocationPicker"
-// ADD PLOT NAME TO DB MODEL
 
 const NewPlot = () =>{
-    const [plot, setPlot] = useState({latitude:'', longitude: '', sun_shade:'', plot_type: '', area_sq_m:''})
+    const [plot, setPlot] = useState({plot_name:'', latitude:'', longitude: '', sun_shade:'', plot_type: '', area_sq_m:''})
     const [coords, setCoords] = useState(null)
     const navigate = useNavigate()
 
@@ -53,6 +52,15 @@ const NewPlot = () =>{
         <button onClick={getCurrentLocation}>Get my current location</button>
 
         <form onSubmit={handleSubmit}>
+            <input
+                type="text"
+                name="plot_name"
+                value={plot.plot_name}
+                onChange={handleChange}
+                placeholder="Plot name"
+                required
+            />
+
             <input 
                 type="number"
                 name="area_sq_m"

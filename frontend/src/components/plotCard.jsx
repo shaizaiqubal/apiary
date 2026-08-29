@@ -4,7 +4,8 @@ const PlotCard = ({ plot }) => {
     const plotMap = {1:'balcony pot',2:'small garden',3:'large garden',4:'allotment'}
     return(
         <>
-        <h3>{plotMap[plot.plot_type]}</h3>
+        <h3>{plot.plot_name}</h3>
+        <p>{plotMap[plot.plot_type]}</p>
         <Link to={`/plot/${plot.id}`}>Go to plot</Link>
         </>
     )

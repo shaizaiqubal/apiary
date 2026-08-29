@@ -86,6 +86,7 @@ class Plot(Base):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     user_id: Mapped[str] = mapped_column(String, ForeignKey("users.id"), nullable=False)
+    plot_name: Mapped[str] = mapped_column(String)
 
     latitude: Mapped[float] = mapped_column(Float, nullable=False)
     longitude: Mapped[float] = mapped_column(Float, nullable=False)

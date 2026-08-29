@@ -11,6 +11,7 @@ from backend.schemas import PlotSchema
 router = APIRouter(prefix="/plots", tags=["plots"])
 
 class CreatePlot(BaseModel):
+    plot_name: str
     latitude: float
     longitude: float
     sun_shade: str      
@@ -23,6 +24,7 @@ def create_plot(plot: CreatePlot, user_id: str = Depends(get_current_user_id)) -
         get_user_or_404(db, user_id)
         new_plot = Plot(
             user_id=user_id,
+            plot_name=plot.plot_name,
             latitude=plot.latitude,
             longitude=plot.longitude,
             sun_shade=plot.sun_shade,
@@ -84,6 +86,12 @@ def get_plot_map() -> list[dict]:
     with SessionLocal() as db:
         plots = db.execute(select(Plot)).scalars().all()
     return [
-        {"id": p.id, "latitude": p.latitude, "longitude": p.longitude, "milestone": p.milestone}
+        {
+            "id": p.id,
+            "plot_name": p.plot_name,
+            "latitude": p.latitude,
+            "longitude": p.longitude,
+            "milestone": p.milestone,
+        }
         for p in plots
     ]

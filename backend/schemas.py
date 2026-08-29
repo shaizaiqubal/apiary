@@ -92,6 +92,7 @@ class PlotSchema(BaseModel):
 
     id: int
     user_id: str
+    plot_name: str
     latitude: float
     longitude: float
     sun_shade: str
