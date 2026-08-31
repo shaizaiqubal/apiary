@@ -1,0 +1,65 @@
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.home-page,
+.register-page {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 2rem;
+  box-sizing: border-box;
+  background-image: url('../assets/home.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.home-logo {
+  display: block;
+  width: 500px;
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);  height: auto;
+
+}
+
+.home-action-link,
+.home-action-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 400px;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: min(260px, 70vw);
+  padding: 0.9rem 1.3rem;
+  color: #1f1f1f;
+  text-decoration: none;
+  font-family: 'Dogica Bold', 'Dogica Pixel', monospace;
+  font-size: 0.8rem;
+  line-height: 1.2;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.home-action-link:hover,
+.home-action-button:hover {
+  transform: translateX(-50%) translateY(-1px);
+}
+
+.home-action-button {
+  appearance: none;
+}

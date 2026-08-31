@@ -1,0 +1,33 @@
+@font-face {
+  font-family: 'Dogica Pixel';
+  src: url('./assets/fonts/dogicapixel.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Dogica Bold';
+  src: url('./assets/fonts/dogicabold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+:root {
+  font-family: 'Dogica Pixel', monospace;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  font-family: 'Dogica Pixel', monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Dogica Bold', 'Dogica Pixel', monospace;
+}

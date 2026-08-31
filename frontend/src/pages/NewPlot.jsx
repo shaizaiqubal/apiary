@@ -7,6 +7,7 @@ import LocationPicker from "../components/LocationPicker"
 const NewPlot = () =>{
     const [plot, setPlot] = useState({plot_name:'', latitude:'', longitude: '', sun_shade:'', plot_type: '', area_sq_m:''})
     const [coords, setCoords] = useState(null)
+    const [locationError, setLocationError] = useState('')
     const navigate = useNavigate()
 
     const numericFields = ["latitude", "longitude", "area_sq_m", "plot_type"]
@@ -21,6 +22,11 @@ const NewPlot = () =>{
 
     const handleSubmit = async (e) => {
     e.preventDefault()
+    if (!coords || coords.length < 2) {
+        setLocationError('Choose a location on the map or use your current location before creating the plot.')
+        return
+    }
+    setLocationError('')
     const latitude = parseFloat(coords[0])
     const longitude = parseFloat(coords[1])
     const updatedPlot = {... plot, ["latitude"]:latitude, ["longitude"]:longitude}
@@ -52,6 +58,7 @@ const NewPlot = () =>{
         <button onClick={getCurrentLocation}>Get my current location</button>
 
         <form onSubmit={handleSubmit}>
+            {locationError && <p role="alert">{locationError}</p>}
             <input
                 type="text"
                 name="plot_name"

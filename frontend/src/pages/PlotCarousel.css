@@ -1,0 +1,278 @@
+.plot-carousel {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  box-sizing: border-box;
+  background-image: url('../assets/carousel.png');
+  background-position: bottom;
+  background-repeat: no-repeat;
+}
+
+.plot-carousel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.22);
+  /* backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px); */
+}
+
+.plot-carousel > * {
+  position: relative;
+  z-index: 1;
+}
+
+.plot-carousel__viewport {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: min(1000px, 100%);
+}
+
+.embla {
+  width: min(900px, 100%);
+  overflow: hidden;
+}
+
+.embla__container {
+  display: flex;
+}
+
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  padding: 0 0.5rem;
+}
+
+.plot-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 480px;
+  color: #1f1f1f;
+  text-decoration: none;
+  transform: scale(1.5);
+  transform-origin: center;
+}
+
+.plot-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  padding: 2.25rem;
+}
+
+.plot-card-name {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+}
+
+.plot-card-points-row {
+  width: 100%;
+  max-width: 260px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: rgba(31, 31, 31, 0.7);
+  margin-bottom: 0.25rem;
+}
+
+.plot-card-points-current {
+  font-weight: 600;
+}
+
+.plot-card-points-next {
+  text-align: right;
+}
+
+.plot-card-type-badge {
+  display: inline-block;
+  margin: 0.75rem 0 0 0;
+  padding: 0.25rem 0.75rem;
+  background: rgba(31, 31, 31, 0.08);
+  border-radius: 999px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(31, 31, 31, 0.6);
+}
+
+.progress-bar {
+  width: 100%;
+  max-width: 260px;
+  margin: 0.5rem 0 0.5rem;
+}
+
+.progress-bar__track {
+  width: 100%;
+  height: 12px;
+  background: rgba(31, 31, 31, 0.08);
+  border: 1px solid rgba(31, 31, 31, 0.2);
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.progress-bar__fill {
+  height: 100%;
+  background: #1f1f1f;
+  transition: width 0.2s ease;
+  min-width: 2px;
+}
+
+.plot-card-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.plot-card-image {
+  display: block;
+  width: min(330px, 60%);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
+  animation: float-bob 2.5s ease-in-out infinite;
+}
+
+@keyframes float-bob {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.plot-card--add {
+  font-size: 4rem;
+  font-weight: 700;
+}
+
+.plot-carousel__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2.75rem;
+  height: 2.75rem;
+  background: none;
+  border: none;
+  color: #1f1f1f;
+  cursor: pointer;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.plot-carousel__arrow img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.plot-carousel__arrow--left {
+  left: 0.5rem;
+}
+
+.plot-carousel__arrow--right {
+  right: 0.5rem;
+}
+
+.plot-carousel__arrow--left img {
+  transform: scaleX(-1);
+}
+
+.plot-carousel__dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.plot-carousel__dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  border: 1px solid #1f1f1f;
+  background: rgba(255,255,255,0.6);
+  cursor: pointer;
+}
+
+.plot-carousel__dot.is-active {
+  background: #1f1f1f;
+}
+
+.plot-carousel__nav {
+  position: absolute;
+  left: 1.5rem;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  pointer-events: none;
+  gap: 1rem;
+}
+
+.plot-carousel__nav-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.plot-carousel__nav-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  position: relative;
+}
+
+.plot-carousel__nav-link img {
+  display: block;
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.2));
+}
+
+.plot-carousel__nav-tooltip {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  color: rgba(31, 31, 31, 0.6);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.plot-carousel__nav-section:hover .plot-carousel__nav-tooltip {
+  opacity: 1;
+}
+
+.plot-carousel__nav-caption {
+  font-size: 0.85rem;
+  color: rgba(31, 31, 31, 0.5);
+  text-align: center;
+  flex: 1;
+  pointer-events: auto;
+}
+
