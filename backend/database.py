@@ -1,8 +1,19 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, sessionmaker, DeclarativeBase
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+if not DATABASE_URL:
+    raise RuntimeError(
+        "DATABASE_URL is not set. "
+        "Set it to a valid PostgreSQL URL before starting the app."
+    )
 
 engine = create_engine(
-    url='postgresql+psycopg://shaiza@localhost:5432/bee',
+    DATABASE_URL,
     echo=False,
     future=True,
 )

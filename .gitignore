@@ -2,7 +2,7 @@
 .env
 __pycache__
 .vscode
-
+application_default_credentials.json
 # Logs
 logs
 *.log

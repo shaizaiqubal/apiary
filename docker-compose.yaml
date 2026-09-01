@@ -1,0 +1,56 @@
+services:
+
+  api:
+    build: .
+    ports:
+    - "8000:8000"
+    env_file:
+    - .env
+    environment:
+    - GOOGLE_APPLICATION_CREDENTIALS
+    - GOOGLE_CLOUD_PROJECT
+    depends_on:
+      postgres:
+        condition: service_healthy
+      init_db:
+        condition: service_completed_successfully
+    volumes:
+      - ./backend/config:/app/backend/config:ro
+  postgres:
+      image: postgres:17
+      environment:
+        POSTGRES_DB: ${POSTGRES_DB}
+        POSTGRES_USER: ${POSTGRES_USER}
+        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      healthcheck:
+        test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+        interval: 5s
+        timeout: 5s
+        retries: 10
+      volumes:
+        - postgres_data:/var/lib/postgresql/data
+
+  init_db:
+      build: .
+      command: python init_db.py
+      env_file:
+      - .env
+      depends_on:
+        postgres:
+          condition: service_healthy
+
+  frontend:
+      build:
+        context: ./frontend
+      ports:
+        - "5173:5173"
+      volumes:
+        - ./frontend:/app/frontend
+        - frontend_node_modules:/app/frontend/node_modules
+      depends_on:
+        - api
+
+volumes:
+  frontend_node_modules:
+  postgres_data:
+  
