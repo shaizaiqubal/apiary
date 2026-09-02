@@ -46,7 +46,8 @@ const PlotDetail = () => {
         Sanctuary: null,
     }
 
-    const currentMilestone = plot.milestone || 'Seedling'
+    const currentMilestone = String(plot.milestone || 'Seedling').toLowerCase()
+        .replace(/^./, (letter) => letter.toUpperCase())
     const nextThreshold = milestoneThresholds[currentMilestone]
     const pointsToNext = nextThreshold === null ? 0 : Math.max(nextThreshold - (plot.points || 0), 0)
 
@@ -68,20 +69,19 @@ const PlotDetail = () => {
             <header className="plotdetail-header-card">
                 <div className="plotdetail-header-row">
                     <h1 className="plotdetail-title">{plot.plot_name}</h1>
-                    <span className={`plotdetail-badge plotdetail-badge--${plot.milestone || 'Seedling'}`}>
-                        {plot.milestone || 'Seedling'}
+                    <span className={`plotdetail-badge plotdetail-badge--${currentMilestone}`}>
+                        {currentMilestone}
                     </span>
                 </div>
 
                 <div className="plotdetail-points-row">
                     <strong>{plot.points ?? 0} / {nextThreshold ?? (plot.points ?? 0)} pts</strong>
-                    <span>{nextThreshold ? `${pointsToNext} pts to next tier` : 'Final tier reached'}</span>
                 </div>
 
                 <ProgressBar milestone={plot.milestone || 'Seedling'} points={plot.points ?? 0} />
 
                 <div className="plotdetail-points-caption">
-                    {nextThreshold ? `${pointsToNext} points to ${currentMilestone === 'Seedling' ? 'Garden' : currentMilestone === 'Garden' ? 'Habitat' : 'Sanctuary'} tier` : 'Sanctuary is the final tier.'}
+                    {nextThreshold ? `${pointsToNext} points to ${currentMilestone === 'Seedling' ? 'Garden' : currentMilestone === 'Garden' ? 'Habitat' : 'Sanctuary'} tier` : 'Final tier reached!.'}
                 </div>
             </header>
 
