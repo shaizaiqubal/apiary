@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from "react"
 import useEmblaCarousel from "embla-carousel-react"
 import { getPlots } from "../api"
 import { Link } from "react-router-dom"
-import PlotCard from "../components/PlotCard"
+import PlotCard from "../components/plotCard"
 import "./PlotCarousel.css"
 
 const PlotCarousel = () => {

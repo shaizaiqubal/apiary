@@ -26,11 +26,20 @@ def get_user_beedex(user_id: str = Depends(get_current_user_id)) -> list[Species
         
         plot_ids = [plot.id for plot in plots]
 
-        sightings = db.execute(select(Sighting).where(Sighting.plot_id.in_(plot_ids))).scalars().all()
+        sightings = db.execute(
+            select(Sighting).where(
+                Sighting.plot_id.in_(plot_ids),
+                Sighting.verified_status == "confirmed",
+                Sighting.species_id.is_not(None),
+            )
+        ).scalars().all()
 
-        # Extract unique species from sightings
         unique_species_ids = {sighting.species_id for sighting in sightings}
-        species_list = db.execute(select(Species).where(Species.species_id.in_(unique_species_ids))).scalars().all()
+        species_list = db.execute(
+            select(Species)
+            .where(Species.species_id.in_(unique_species_ids))
+            .order_by(Species.species_id)
+        ).scalars().all()
 
         if not species_list:
             return []
