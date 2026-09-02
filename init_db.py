@@ -4,6 +4,7 @@ from backend.models import (
     Plant,
     Shiny,
     Species,
+    PlotMilestone
 )
 import csv
 import logging
@@ -76,6 +77,20 @@ def load_plant():
             logging.info("%s inserted", row["plant_id"])
 
 
+def load_plots():
+    with open("data/milestones.csv", mode="r", encoding="utf-8", newline="") as file:
+        reader = csv.DictReader(file)
+
+        for row in reader:
+            plot_record = PlotMilestone(
+                milestone_id=int(row["milestone_id"]),
+                milestone=row["milestone"],
+                points_required=int(row["points_required"])
+            )
+            with SessionLocal() as db:
+                db.merge(plot_record)
+                db.commit()
+            logging.info("%s inserted", row["milestone_id"])
 def load_species():
     with open("data/species.csv", mode="r", encoding="utf-8", newline="") as file:
         reader = csv.DictReader(file)
@@ -100,6 +115,7 @@ def load_csv_to_db():
     load_plant()
     load_nesting()
     load_shiny()
+    load_plots()
 
     logging.info("Data successfully inserted into PostgreSQL!")
 
