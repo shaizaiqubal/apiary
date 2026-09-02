@@ -6,7 +6,7 @@ import "./Beedex.css"
 
 const Beedex = () => {
     const [loading, setLoading] = useState(true)
-    const [showUnlocked, setShowUnlocked] = useState(true)
+    const [showUnlocked, setShowUnlocked] = useState(false)
     const [beedex, setBeedex] = useState([])
     const [selectedIndex, setSelectedIndex] = useState(0)
     const carouselRef = useRef(null)
@@ -35,7 +35,10 @@ const Beedex = () => {
         setSelectedIndex(Math.min(beedex.length - 1, Math.floor(viewport.scrollTop / (slideHeight + 16)) * columnCount))
     }
 
-    useEffect(() => setSelectedIndex(0), [showUnlocked])
+    const handleFilterChange = (showAll) => {
+        setSelectedIndex(0)
+        setShowUnlocked(showAll)
+    }
 
     if(loading){
         return <main className="beedex-page"><p className="beedex-status">Loading beedex...</p></main>
@@ -58,14 +61,14 @@ const Beedex = () => {
             <nav className="beedex-filter" aria-label="Bee collection filter">
                 <button
                     className={showUnlocked ? "beedex-filter__button is-active" : "beedex-filter__button"}
-                    onClick={() => setShowUnlocked(true)}
+                    onClick={() => handleFilterChange(true)}
                     type="button"
                 >
                     All bees
                 </button>
                 <button
                     className={!showUnlocked ? "beedex-filter__button is-active" : "beedex-filter__button"}
-                    onClick={() => setShowUnlocked(false)}
+                    onClick={() => handleFilterChange(false)}
                     type="button"
                 >
                     Discovered
