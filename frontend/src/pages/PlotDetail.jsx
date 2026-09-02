@@ -106,7 +106,7 @@ const PlotDetail = () => {
 
             <section className="plotdetail-section">
                 <div className="plotdetail-section__header">
-                    <h3>Get a quests</h3>
+                    <h3>QUESTS</h3>
                     <button className="plotdetail-quest-trigger" type="button" onClick={fetchQuest}>Get a quest</button>
                 </div>
 

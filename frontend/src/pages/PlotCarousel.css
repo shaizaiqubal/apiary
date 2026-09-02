@@ -175,6 +175,17 @@
   align-items: center;
   justify-content: center;
   padding: 0;
+  transition: transform 160ms ease, filter 160ms ease;
+}
+
+.plot-carousel__arrow:hover {
+  transform: translateY(-50%) scale(1.12);
+  filter: drop-shadow(0 4px 5px rgba(31, 31, 31, 0.2));
+}
+
+.plot-carousel__arrow:active {
+  transform: translateY(-50%) scale(0.94);
+  filter: none;
 }
 
 .plot-carousel__arrow img {
@@ -196,11 +207,17 @@
   transform: scaleX(-1);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .plot-carousel__arrow {
+    transition: none;
+  }
+}
+
 .plot-carousel__dots {
   display: flex;
   justify-content: center;
   gap: 0.5rem;
-  margin-top: 0.75rem;
+  margin-top: 0.5rem;
 }
 
 .plot-carousel__dot {
