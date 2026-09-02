@@ -17,6 +17,16 @@ class SpeciesSchema(BaseModel):
     fun_facts: str
 
 
+class LatestImageSchema(BaseModel):
+    url: str
+    sighting_id: str
+    timestamp: datetime.datetime
+
+
+class UserSpeciesSchema(SpeciesSchema):
+    latest_image: LatestImageSchema | None = None
+
+
 class PlantQuestSchema(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
