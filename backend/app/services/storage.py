@@ -1,4 +1,5 @@
 from google.cloud import storage
+import datetime
 import os
 from dotenv import load_dotenv
 
@@ -37,4 +38,24 @@ def upload_image(image_bytes: bytes, object_name: str, content_type: str) -> str
         return object_name
     except Exception as exc:
         print(f"GCP image upload failed: {exc}")
+        return None
+
+
+def get_signed_image_url(object_name: str) -> str | None:
+    if bucket is None:
+        print(
+            "GCP signed URL generation failed: missing Google Cloud project or bucket config. "
+            "Set GOOGLE_CLOUD_PROJECT and BUCKET_NAME before requesting images."
+        )
+        return None
+
+    try:
+        blob = bucket.blob(object_name)
+        return blob.generate_signed_url(
+            version="v4",
+            expiration=datetime.timedelta(minutes=15),
+            method="GET",
+        )
+    except Exception as exc:
+        print(f"GCP signed URL generation failed: {exc}")
         return None

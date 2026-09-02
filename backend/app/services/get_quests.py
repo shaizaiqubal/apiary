@@ -1,3 +1,5 @@
+from random import choice
+
 from sqlalchemy.orm import Session
 from sqlalchemy.sql import func, select
 from backend.models import Plant, Nesting, Plot, Quest
@@ -44,13 +46,15 @@ def get_plant_quests(db: Session, plot: Plot) -> Plant | None:
     ]
 
     if plot.milestone.lower() in STRICT_MILESTONES:
-        fitting = [p for p in candidates if p.plot_type <= plot.plot_type]
-        return fitting[0] if fitting else None
+        pool = [p for p in candidates if p.plot_type <= plot.plot_type]
+        selected = choice(pool) if pool else None
+        return selected
 
     # Habitat / Sanctuary: prefer a fit, fall back to anything at this milestone
     fitting = [p for p in candidates if p.plot_type <= plot.plot_type]
     pool = fitting if fitting else candidates
-    return pool[0] if pool else None
+    selected = choice(pool) if pool else None
+    return selected
 
 
 def get_nesting_quests(db: Session, plot: Plot) -> Nesting | None:
@@ -67,10 +71,11 @@ def get_nesting_quests(db: Session, plot: Plot) -> Nesting | None:
         ).scalars()
     )
     if plot.milestone.lower() in STRICT_MILESTONES:
-        fitting = [a for a in candidates 
-                   if a.action_id not in completed_action_quests
-                   and a.plot_type <= plot.plot_type]
-        return fitting[0] if fitting else None
+        pool = [a for a in candidates
+            if a.action_id not in completed_action_quests
+            and a.plot_type <= plot.plot_type]
+        selected = choice(pool) if pool else None
+        return selected
 
     fitting = [a for a in candidates 
                if a.action_id not in completed_action_quests
@@ -79,4 +84,5 @@ def get_nesting_quests(db: Session, plot: Plot) -> Nesting | None:
         action for action in candidates
         if action.action_id not in completed_action_quests
     ]
-    return pool[0] if pool else None
+    selected = choice(pool) if pool else None
+    return selected

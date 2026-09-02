@@ -10,7 +10,7 @@ const SpeciesCard = ({species, number}) => {
             <div className="species-card__illustration" aria-hidden="true">
                 <img
                     className="species-card__image"
-                    src="/bees/default-bee.jpg"
+                    src={species.latest_image?.url || "/bees/default-bee.jpg"}
                     alt=""
                     onError={(event) => { event.currentTarget.hidden = true }}
                 />
@@ -20,7 +20,10 @@ const SpeciesCard = ({species, number}) => {
                 <h2>{species.common_name}</h2>
                 <p className="species-card__scientific"><em>{species.scientific_name}</em></p>
                 <p className="species-card__fact">{species.fun_facts}</p>
-                <div className="species-card__points"><span>FIELD POINTS</span><strong>+{species.points}</strong></div>
+                <div className="species-card__points">
+                    <span>FIELD POINTS</span>
+                    <strong>+{species.points}</strong>
+                </div>
             </div>
         </article>
     )

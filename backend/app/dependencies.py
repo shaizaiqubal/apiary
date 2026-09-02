@@ -1,5 +1,5 @@
 from uuid import UUID
-from sqlalchemy import func, select
+from sqlalchemy import select
 from fastapi import Header, HTTPException, status
 from backend.models import Plot, PlotMilestone
 import hashlib
@@ -41,34 +41,22 @@ def update_milestone(plot_id: int, user_id: str, db) -> bool:
     if not plot:
         raise HTTPException(status_code=404, detail="Plot not found")
 
-    cur_points = plot.points
+    milestones = db.execute(
+        select(PlotMilestone).order_by(PlotMilestone.points_required.desc())
+    ).scalars().all()
 
-    current_milestone = db.execute(
-        select(PlotMilestone).where(
-            func.lower(PlotMilestone.milestone) == func.lower(plot.milestone)
-        )
-    ).scalar_one_or_none()
-
-    if not current_milestone:
+    if not milestones:
         raise HTTPException(status_code=404, detail="Current plot milestone not found")
 
-    if plot.milestone != current_milestone.milestone:
-        plot.milestone = current_milestone.milestone
+    current_milestone = next(
+        milestone for milestone in milestones
+        if plot.points >= milestone.points_required
+    )
+    milestone_changed = plot.milestone.lower() != current_milestone.milestone.lower()
+    plot.milestone = current_milestone.milestone
 
-    next_milestone = db.execute(
-        select(PlotMilestone).where(
-            PlotMilestone.milestone_id == current_milestone.milestone_id + 1
-        )
-    ).scalar_one_or_none()
-
-    if not next_milestone:
-        return False  # No further milestones
-    
-    if cur_points >= next_milestone.points_required:
-        plot.milestone = next_milestone.milestone
+    if milestone_changed:
         db.commit()
         db.refresh(plot)
 
-        return True  # Milestone updated
-
-    return False  # No update needed
+    return milestone_changed
