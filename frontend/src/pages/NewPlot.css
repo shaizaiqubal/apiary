@@ -1,6 +1,8 @@
 .newplot-page {
-  min-height: 100vh;
+  width: 100vw;
+  height: 100vh;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 2rem clamp(1rem, 5vw, 5rem) 4rem;
   color: #1f2a1f;
   background-image: linear-gradient(rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.22)), url('../assets/carousel.jpeg');

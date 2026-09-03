@@ -64,7 +64,6 @@ const NewPlot = () =>{
                     <h1>Create a new plot</h1>
                     <p className="newplot-intro">Choose a patch of earth and add it to your map!.</p>
                 </div>
-                <div className="newplot-level" aria-label="New plot quest"><span>QUEST</span><strong>01</strong></div>
             </header>
             <div className="newplot-layout">
                 <section className="newplot-map-panel">

@@ -139,7 +139,7 @@
 
 .plot-card-image {
   display: block;
-  width: min(330px, 60%);
+  width: min(380px, 70%);
   height: auto;
   object-fit: contain;
   filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
@@ -170,8 +170,8 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 2.75rem;
-  height: 2.75rem;
+  width: clamp(1.75rem, 5vw, 2.75rem);
+  height: clamp(1.75rem, 5vw, 2.75rem);
   background: none;
   border: none;
   color: #1f1f1f;

@@ -27,11 +27,13 @@ html, body, #root {
 
 .home-logo {
   display: block;
-  width: 500px;
+  width: min(500px, 80vw);
+  max-width: 100%;
   position: absolute;
-  top: 100px;
+  top: clamp(2rem, 12vh, 100px);
   left: 50%;
-  transform: translateX(-50%);  height: auto;
+  transform: translateX(-50%);
+  height: auto;
 
 }
 
