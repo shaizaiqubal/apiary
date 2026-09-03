@@ -1,0 +1,59 @@
+.newplot-page {
+  min-height: 100vh;
+  overflow-y: auto;
+  padding: 2rem clamp(1rem, 5vw, 5rem) 4rem;
+  color: #1f2a1f;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.22)), url('../assets/carousel.jpeg');
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.newplot-header, .newplot-layout { max-width: 1120px; margin: 0 auto; }
+.newplot-header { display: flex; align-items: end; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
+.newplot-kicker, .newplot-label { margin: 0 0 0.65rem; color: rgba(31, 31, 31, 0.6); font-size: 0.55rem; letter-spacing: 0.08em; }
+.newplot-header h1 { margin: 0; font-size: clamp(1.8rem, 5vw, 3.2rem); line-height: 1.05; text-transform: uppercase; }
+.newplot-intro { margin: 0.8rem 0 0; color: #70483e; font-size: 0.65rem; line-height: 1.7; }
+.newplot-level { display: grid; min-width: 74px; padding: 0.6rem; border: 1px solid rgba(31, 49, 34, 0.18); border-radius: 12px; text-align: center; background: rgba(255, 255, 255, 0.56); box-shadow: 0 4px 14px rgba(26, 38, 30, 0.06); }
+.newplot-level span { font-size: 0.45rem; }
+.newplot-level strong { margin-top: 0.25rem; font-size: 1.35rem; }
+.newplot-layout { display: grid; grid-template-columns: minmax(320px, 0.8fr) minmax(0, 1.2fr); gap: 1.25rem; align-items: start; }
+.newplot-map-panel, .newplot-form { border: 1px solid rgba(31, 49, 34, 0.18); border-radius: 12px; background: rgba(255, 255, 255, 0.7); box-shadow: 0 4px 14px rgba(26, 38, 30, 0.06); }
+.newplot-map-panel { padding: 1rem; }
+.newplot-map-panel { grid-column: 2; }
+.newplot-form { grid-column: 1; grid-row: 1; display: flex; flex-direction: column; gap: 1rem; padding: 1.25rem; }
+.newplot-panel-heading { display: flex; justify-content: space-between; align-items: start; gap: 0.7rem; margin-bottom: 0.9rem; }
+.newplot-panel-heading h2 { margin: 0; font-size: 0.9rem; text-transform: uppercase; }
+.newplot-status, .newplot-xp { padding: 0.35rem; color: #1f2a1f; background: rgba(31, 49, 34, 0.12); font-size: 0.45rem; white-space: nowrap; }
+.newplot-xp { color: #2f6d3f; background: rgba(45, 93, 62, 0.14); }
+.newplot-map-frame { height: 390px; overflow: hidden; border: 1px solid rgba(31, 49, 34, 0.18); border-radius: 8px; background: #c9d7b1; }
+.newplot-map { width: 100%; height: 100%; }
+.newplot-map-footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 0.85rem; }
+.newplot-map-footer p { margin: 0; color: #75564a; font-size: 0.55rem; line-height: 1.5; }
+.newplot-location-button, .newplot-submit { border: 1px solid rgba(31, 49, 34, 0.35); border-radius: 10px; font-family: 'Dogica Bold', monospace; font-size: 0.55rem; cursor: pointer; }
+.newplot-location-button { padding: 0.7rem; color: #1f2a1f; background: rgba(255, 255, 255, 0.7); white-space: nowrap; }
+.newplot-location-button:hover, .newplot-submit:hover { transform: translateY(-2px); box-shadow: 0 7px 18px rgba(26, 38, 30, 0.12); }
+.newplot-location-button:disabled { cursor: wait; opacity: 0.65; }
+.newplot-form label { display: grid; gap: 0.45rem; color: rgba(31, 31, 31, 0.6); font-size: 0.55rem; text-transform: uppercase; }
+.newplot-form input, .newplot-form select { width: 100%; padding: 0.8rem; border: 1px solid rgba(31, 49, 34, 0.25); border-radius: 8px; color: #1f2a1f; background: rgba(255, 255, 255, 0.8); font: 0.65rem 'Dogica Pixel', monospace; }
+.newplot-form input:focus, .newplot-form select:focus { outline: 2px solid rgba(45, 93, 62, 0.35); outline-offset: 2px; }
+.newplot-form-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 0.8rem; }
+.newplot-error { margin: -0.4rem 0 0; padding: 0.65rem; color: #8a3027; border: 1px solid #d88d7c; background: #f9ded4; font-size: 0.55rem; line-height: 1.5; }
+.newplot-submit { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding: 0.9rem 1rem; color: #1f2a1f; background: rgba(31, 49, 34, 0.12); }
+.newplot-submit span:last-child { font-size: 1rem; }
+
+@media (max-width: 760px) {
+  .newplot-page { padding: 1.25rem 0.85rem 2.5rem; }
+  .newplot-header { align-items: start; }
+  .newplot-layout { grid-template-columns: 1fr; }
+  .newplot-map-panel, .newplot-form { grid-column: auto; grid-row: auto; }
+  .newplot-map-frame { height: 300px; }
+}
+
+@media (max-width: 430px) {
+  .newplot-level { min-width: 58px; }
+  .newplot-map-footer { align-items: stretch; flex-direction: column; }
+  .newplot-location-button { width: 100%; }
+  .newplot-form-grid { grid-template-columns: 1fr; }
+}

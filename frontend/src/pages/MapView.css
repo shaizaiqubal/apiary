@@ -1,0 +1,120 @@
+.mapview-page {
+  min-height: 100vh;
+  padding: 2rem clamp(1rem, 5vw, 5rem) 3rem;
+  color: #1f2a1f;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.22)), url('../assets/carousel.jpeg');
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.mapview-header,
+.mapview-toolbar,
+.mapview-map {
+  width: min(1120px, 100%);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.mapview-header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.mapview-kicker {
+  margin: 0 0 0.65rem;
+  color: rgba(31, 31, 31, 0.6);
+  font-size: 0.55rem;
+  letter-spacing: 0.08em;
+}
+
+.mapview-header h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 5vw, 3.2rem);
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.mapview-intro {
+  margin: 0.8rem 0 0;
+  color: #70483e;
+  font-size: 0.65rem;
+  line-height: 1.7;
+}
+
+.mapview-stat {
+  display: grid;
+  min-width: 108px;
+  padding: 0.65rem;
+  border: 1px solid rgba(31, 49, 34, 0.18);
+  text-align: center;
+  background: rgba(255, 255, 255, 0.56);
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(26, 38, 30, 0.06);
+}
+
+.mapview-stat strong { font-size: 1.4rem; }
+.mapview-stat span { margin-top: 0.35rem; font-size: 0.42rem; }
+
+.mapview-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid rgba(31, 49, 34, 0.18);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 4px 14px rgba(26, 38, 30, 0.06);
+  font-size: 0.52rem;
+}
+
+.mapview-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 0.35rem;
+  border: 1px solid rgba(31, 49, 34, 0.3);
+  border-radius: 50%;
+  background: #2f6d3f;
+}
+
+.mapview-actions { display: flex; gap: 0.5rem; }
+.mapview-action {
+  padding: 0.55rem 0.7rem;
+  border: 1px solid rgba(31, 49, 34, 0.35);
+  border-radius: 10px;
+  color: #1f2a1f;
+  background: rgba(255, 255, 255, 0.7);
+  font-family: 'Dogica Bold', monospace;
+  font-size: 0.48rem;
+  text-decoration: none;
+}
+
+.mapview-action--primary { color: #1f2a1f; background: rgba(31, 49, 34, 0.12); }
+.mapview-action:hover { transform: translateY(-2px); box-shadow: 0 7px 18px rgba(26, 38, 30, 0.12); }
+
+.mapview-map {
+  height: min(68vh, 680px);
+  min-height: 380px;
+  border: 1px solid rgba(31, 49, 34, 0.18);
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(26, 38, 30, 0.06);
+}
+
+.leaflet-popup-content { font-family: 'Dogica Pixel', monospace; font-size: 0.65rem; line-height: 1.7; }
+.leaflet-popup-content a { color: #2f6d3f; font-family: 'Dogica Bold', monospace; font-size: 0.52rem; }
+
+@media (max-width: 600px) {
+  .mapview-page { padding: 1.25rem 0.85rem 2rem; }
+  .mapview-header { align-items: start; }
+  .mapview-toolbar { align-items: stretch; flex-direction: column; }
+  .mapview-actions { width: 100%; }
+  .mapview-action { flex: 1; text-align: center; }
+  .mapview-map { min-height: 460px; height: 65vh; }
+}
