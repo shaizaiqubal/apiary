@@ -1,8 +1,19 @@
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
 import { useState, useEffect } from 'react'
 import { getPlots , getMap} from '../api'
 import { Link } from 'react-router-dom'
 import './MapView.css'
+
+const MapZoomControls = () => {
+    const map = useMap()
+
+    return (
+        <div className="mapview-zoom-controls" aria-label="Map zoom controls">
+            <button type="button" onClick={() => map.zoomIn()} aria-label="Zoom in">+</button>
+            <button type="button" onClick={() => map.zoomOut()} aria-label="Zoom out">-</button>
+        </div>
+    )
+}
 
 
 const MapView = () => {
@@ -30,32 +41,17 @@ const MapView = () => {
 
     return(
        <main className="mapview-page">
-            <header className="mapview-header">
-                <div>
-                    <p className="mapview-kicker">FIELD ATLAS // EXPLORATION MAP</p>
-                    <h1>Apiary map</h1>
-                    <p className="mapview-intro">Your growing network of pollinator habitats.</p>
-                </div>
-                <div className="mapview-stat" aria-label={`${mapPlots.length} mapped plots`}>
-                    <strong>{mapPlots.length}</strong>
-                    <span>PINNED PLOTS</span>
-                </div>
-            </header>
-            <div className="mapview-toolbar">
-                <span><i className="mapview-dot" aria-hidden="true" /> {mapPlots.length ? 'Habitat pins are active' : 'No habitat pins yet'}</span>
-                <div className="mapview-actions">
-                    <Link to="/plots" className="mapview-action">VIEW PLOTS</Link>
-                    <Link to="/plot/new" className="mapview-action mapview-action--primary">+ ADD PLOT</Link>
-                </div>
-            </div>
        <MapContainer 
             center={center}
             zoom={13}
+          zoomControl={false}
             className="mapview-map">
 
                 <TileLayer 
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
+
+                <MapZoomControls />
 
                 {mapPlots.map((plot) => (
                     <Marker key={plot.id} position={[plot.latitude, plot.longitude]}>
@@ -67,6 +63,18 @@ const MapView = () => {
                     </Marker>
                 ))}
         </MapContainer>
+
+            <header className="mapview-header mapview-overlay">
+                <h1>Field Map</h1>
+                <p>{plots.length} Plots</p>
+            </header>
+
+            <Link to="/plot/new" className="mapview-add mapview-overlay">
+                <span aria-hidden="true">+</span>
+                <span>Add plot</span>
+            </Link>
+
+            <p className="mapview-hint mapview-overlay">Tap a pin to view that plot</p>
         </main>
     )
 }

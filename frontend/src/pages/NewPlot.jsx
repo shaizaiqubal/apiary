@@ -61,16 +61,15 @@ const NewPlot = () =>{
         <main className="newplot-page">
             <header className="newplot-header">
                 <div>
-                    <p className="newplot-kicker">FIELD JOURNAL // NEW DISCOVERY</p>
-                    <h1>Plant a new plot</h1>
-                    <p className="newplot-intro">Choose a patch of earth and add it to your apiary map.</p>
+                    <h1>Create a new plot</h1>
+                    <p className="newplot-intro">Choose a patch of earth and add it to your map!.</p>
                 </div>
                 <div className="newplot-level" aria-label="New plot quest"><span>QUEST</span><strong>01</strong></div>
             </header>
             <div className="newplot-layout">
                 <section className="newplot-map-panel">
                     <div className="newplot-panel-heading">
-                        <div><p className="newplot-label">STEP 01</p><h2>Mark the habitat</h2></div>
+                        <div><p className="newplot-label">STEP 01</p><h2>Set Plot Location</h2></div>
                         <span className="newplot-status">{coords ? "LOCATION SET" : "AWAITING PIN"}</span>
                     </div>
                     <div className="newplot-map-frame">
@@ -89,7 +88,6 @@ const NewPlot = () =>{
                 <form className="newplot-form" onSubmit={handleSubmit}>
                     <div className="newplot-panel-heading">
                         <div><p className="newplot-label">STEP 02</p><h2>Record the details</h2></div>
-                        <span className="newplot-xp">+ 25 XP</span>
                     </div>
                     {locationError && <p className="newplot-error" role="alert">{locationError}</p>}
                     <label>Plot name<input type="text" name="plot_name" value={plot.plot_name} onChange={handleChange} placeholder="e.g. Rooftop meadow" required /></label>
@@ -98,7 +96,7 @@ const NewPlot = () =>{
                         <label>Sunlight<select name="sun_shade" value={plot.sun_shade} onChange={handleChange}><option value="">Choose one</option><option value="full_sun">Full sun</option><option value="partial_shade">Partial shade</option><option value="full_shade">Full shade</option></select></label>
                     </div>
                     <label>Habitat type<select name="plot_type" value={plot.plot_type} onChange={handleChange}><option value="">Choose one</option><option value="1">Balcony Pot</option><option value="2">Small Garden</option><option value="3">Large Garden</option><option value="4">Allotment</option></select></label>
-                    <button className="newplot-submit" type="submit"><span>ADD TO APIARY</span><span aria-hidden="true">&gt;</span></button>
+                    <button className="newplot-submit" type="submit"><span>CREATE NEW PLOT</span><span aria-hidden="true">&gt;</span></button>
                 </form>
             </div>
         </main>

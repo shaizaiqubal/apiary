@@ -77,9 +77,11 @@ const PlotCarousel = () => {
                         {slides.map((slide, index) => (
                             <div key={slide.id ?? slide.plot?.id ?? index} className="embla__slide">
                                 {slide.type === "add" ? (
-                                    <Link to="/plot/new" className="plot-card plot-card--add">
-                                        +
-                                    </Link>
+                                    <div className="plot-card plot-card--add">
+                                        <Link to="/plot/new" className="plot-card-add-link" aria-label="Add a plot">
+                                            +
+                                        </Link>
+                                    </div>
                                 ) : (
                                     <PlotCard plot={slide.plot} />
                                 )}

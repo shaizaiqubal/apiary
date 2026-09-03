@@ -48,7 +48,6 @@ const Beedex = () => {
         <main className="beedex-page">
             <header className="beedex-header">
                 <div>
-                    <p className="beedex-kicker">FIELD GUIDE / COLLECTION</p>
                     <h1>Bee-dex</h1>
                     <p className="beedex-subtitle">Meet the pollinators in your neighborhood.</p>
                 </div>
