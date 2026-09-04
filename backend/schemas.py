@@ -76,6 +76,8 @@ class QuestSchema(BaseModel):
     photo_url: str | None
     verified_status: str
     points_awarded: int
+    plant_name: str | None = None
+    action: str | None = None
 
 
 class QuestLogResponse(BaseModel):
@@ -95,6 +97,7 @@ class SightingSchema(BaseModel):
     candidate_species_json: str | None
     verified_status: str
     points_awarded: int
+    species_name: str | None = None
 
 
 class PlotSchema(BaseModel):

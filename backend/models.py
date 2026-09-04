@@ -123,6 +123,14 @@ class Quest(Base):
     plant: Mapped["Plant | None"] = relationship("Plant", back_populates="quests")
     nesting_action: Mapped["Nesting | None"] = relationship("Nesting", back_populates="quests")
 
+    @property
+    def plant_name(self) -> str | None:
+        return self.plant.common_name if self.plant else None
+
+    @property
+    def action(self) -> str | None:
+        return self.nesting_action.action if self.nesting_action else None
+
 
 class Sighting(Base):
     __tablename__ = "sightings"
@@ -144,6 +152,10 @@ class Sighting(Base):
 
     plot: Mapped["Plot"] = relationship("Plot", back_populates="sightings")
     species: Mapped["Species | None"] = relationship("Species", back_populates="sightings")
+
+    @property
+    def species_name(self) -> str | None:
+        return self.species.common_name if self.species else None
 
 class PlotMilestone(Base):
     __tablename__ = "plot_milestones"

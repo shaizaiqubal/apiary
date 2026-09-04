@@ -54,12 +54,12 @@ const PlotDetail = () => {
     const activityLog = [
         ...(plot.quests ?? []).map((item) => ({
             id: item.id,
-            label: item.plant_id ? `Plant ${item.plant_id}` : `Action ${item.action_id}`,
+            label: item.plant_id ? (item.plant_name || `Plant ${item.plant_id}`) : (item.action || `Action ${item.action_id}`),
             points: `+${item.points_awarded}`,
         })),
         ...confirmedSightings.map((item) => ({
             id: `sighting-${item.id}`,
-            label: `Species ${item.species_id ?? 'unknown'}`,
+            label: item.species_name || `Species ${item.species_id ?? 'unknown'}`,
             points: `+${item.points_awarded}`,
         })),
     ]

@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.orm import selectinload
 from backend.database import SessionLocal
-from backend.models import Plot
+from backend.models import Plot, Quest, Sighting
 from pydantic import BaseModel
 from backend.app.dependencies import get_current_user_id
 from backend.app.routers.users import get_user_or_404
@@ -48,7 +48,10 @@ def get_user_plots(user_id: str = Depends(get_current_user_id)) -> list[Plot]:
             select(Plot)
             .options(
                 selectinload(Plot.quests),
+                selectinload(Plot.quests).selectinload(Quest.plant),
+                selectinload(Plot.quests).selectinload(Quest.nesting_action),
                 selectinload(Plot.sightings),
+                selectinload(Plot.sightings).selectinload(Sighting.species),
             )
             .where(Plot.user_id == user_id)
         )
@@ -65,7 +68,10 @@ def get_plot(plot_id: int, user_id: str = Depends(get_current_user_id)) -> Plot:
             select(Plot)
             .options(
                 selectinload(Plot.quests),
+                selectinload(Plot.quests).selectinload(Quest.plant),
+                selectinload(Plot.quests).selectinload(Quest.nesting_action),
                 selectinload(Plot.sightings),
+                selectinload(Plot.sightings).selectinload(Sighting.species),
             )
             .where(Plot.id == plot_id, Plot.user_id == user_id)
         )
