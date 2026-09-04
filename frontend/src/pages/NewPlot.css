@@ -5,7 +5,7 @@
   overflow-x: hidden;
   padding: 2rem clamp(1rem, 5vw, 5rem) 4rem;
   color: #1f2a1f;
-  background-image: linear-gradient(rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.22)), url('../assets/carousel.jpeg');
+  background-image:url('../assets/grass.png');
   background-position: bottom;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -21,7 +21,7 @@
 .newplot-level span { font-size: 0.45rem; }
 .newplot-level strong { margin-top: 0.25rem; font-size: 1.35rem; }
 .newplot-layout { display: grid; grid-template-columns: minmax(320px, 0.8fr) minmax(0, 1.2fr); gap: 1.25rem; align-items: start; }
-.newplot-map-panel, .newplot-form { border: 1px solid rgba(31, 49, 34, 0.18); border-radius: 12px; background: rgba(255, 255, 255, 0.7); box-shadow: 0 4px 14px rgba(26, 38, 30, 0.06); }
+.newplot-map-panel, .newplot-form { border: 1px solid rgba(31, 49, 34, 0.18); border-radius: 12px; background: #edbe71ab; box-shadow: 0 4px 14px rgba(26, 38, 30, 0.06); }
 .newplot-map-panel { padding: 1rem; }
 .newplot-map-panel { grid-column: 2; }
 .newplot-form { grid-column: 1; grid-row: 1; display: flex; flex-direction: column; gap: 1rem; padding: 1.25rem; }
@@ -34,7 +34,7 @@
 .newplot-map-footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 0.85rem; }
 .newplot-map-footer p { margin: 0; color: #75564a; font-size: 0.55rem; line-height: 1.5; }
 .newplot-location-button, .newplot-submit { border: 1px solid rgba(31, 49, 34, 0.35); border-radius: 10px; font-family: 'Dogica Bold', monospace; font-size: 0.55rem; cursor: pointer; }
-.newplot-location-button { padding: 0.7rem; color: #1f2a1f; background: rgba(255, 255, 255, 0.7); white-space: nowrap; }
+.newplot-location-button { padding: 0.7rem; color: #1f2a1f; background: #f9ded4; white-space: nowrap; }
 .newplot-location-button:hover, .newplot-submit:hover { transform: translateY(-2px); box-shadow: 0 7px 18px rgba(26, 38, 30, 0.12); }
 .newplot-location-button:disabled { cursor: wait; opacity: 0.65; }
 .newplot-form label { display: grid; gap: 0.45rem; color: rgba(31, 31, 31, 0.6); font-size: 0.55rem; text-transform: uppercase; }
@@ -42,7 +42,7 @@
 .newplot-form input:focus, .newplot-form select:focus { outline: 2px solid rgba(45, 93, 62, 0.35); outline-offset: 2px; }
 .newplot-form-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 0.8rem; }
 .newplot-error { margin: -0.4rem 0 0; padding: 0.65rem; color: #8a3027; border: 1px solid #d88d7c; background: #f9ded4; font-size: 0.55rem; line-height: 1.5; }
-.newplot-submit { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding: 0.9rem 1rem; color: #1f2a1f; background: rgba(31, 49, 34, 0.12); }
+.newplot-submit { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding: 0.9rem 1rem; color: #1f2a1f; background: #f7eacc; }
 .newplot-submit span:last-child { font-size: 1rem; }
 
 @media (max-width: 760px) {

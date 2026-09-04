@@ -35,7 +35,7 @@
   overflow: auto;
   border: 1px solid rgba(31, 49, 34, 0.2);
   border-radius: 16px 16px 10px 10px;
-  background: rgba(255, 255, 255, 0.8);
+  background:#f7eacc ;
   box-shadow: 0 -8px 28px rgba(26, 38, 30, 0.2);
   pointer-events: auto;
   animation: sighting-sheet-rise 180ms ease-out;
