@@ -2,7 +2,7 @@
   width: 100vw;
   height: 100vh;
   padding: 24px 16px 48px;
-  color: #503333;
+  color: #1f2a1f;
   background-image: url('../assets/grass.png');
   background-size: auto 100%;
   background-position: bottom;
@@ -23,9 +23,9 @@
 .plotdetail-section,
 .plotdetail-log,
 .plotdetail-quest-card {
-  border: none;
+  border: 2px solid rgba(48, 37, 29, 0.5);
   border-radius: 12px;
-  box-shadow: 5px 5px 0 rgba(43, 33, 24, 0.18), inset 0 1px 0 rgba(255, 248, 223, 0.28);
+  box-shadow: 7px 7px 0 rgba(48, 37, 29, 0.3), 0 12px 24px rgba(48, 37, 29, 0.18), inset 0 2px 0 rgba(255, 248, 223, 0.5), inset 0 -2px 0 rgba(138, 91, 0, 0.16);
 }
 
 .plotdetail-header-card {
@@ -43,8 +43,10 @@
 
 .plotdetail-title {
   margin: 0;
+  color: #fff6cf;
   font-size: clamp(1.8rem, 3vw, 2.8rem);
   line-height: 1.1;
+  text-shadow: 4px 4px 0 #30251d, 7px 7px 0 rgba(138, 91, 0, 0.5);
 }
 
 .plotdetail-badge {
@@ -84,18 +86,21 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
-  color: #49614d;
+  color: #fff6cf;
   font-size: 0.9rem;
+  text-shadow: 2px 2px 0 #30251d;
 }
 
 .plotdetail-points-row strong {
-  color: #1d2a1d;
+  color: #fff6cf;
+  font-weight: 400;
 }
 
 .plotdetail-points-caption {
   margin-top: 8px;
-  color: #5a675f;
+  color: #30251d;
   font-size: 0.8rem;
+  text-shadow: 1px 1px 0 rgba(255, 246, 207, 0.55);
 }
 
 .plotdetail-stats {
@@ -107,29 +112,31 @@
 
 .plotdetail-stat {
   background: #edbe71ab;
-  border: none;
+  border: 2px solid rgba(48, 37, 29, 0.5);
   border-radius: 12px;
   padding: 12px 14px;
-  box-shadow: 3px 3px 0 rgba(43, 33, 24, 0.14);
+  box-shadow: 5px 5px 0 rgba(48, 37, 29, 0.25), inset 0 1px 0 rgba(255, 248, 223, 0.45);
 }
 
 .plotdetail-stat__label {
   display: block;
   margin-bottom: 6px;
-  color: #5a675f;
+  color: #fff6cf;
   font-size: 0.74rem;
+  text-shadow: 1px 1px 0 #30251d;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
 .plotdetail-stat strong {
   font-size: 1rem;
-  color: #503333;
+  color: #30251d;
 }
 
 .plotdetail-section {
   margin-top: 22px;
   padding: 18px;
+  background: #edbe71ab;
 }
 
 .plotdetail-section__header {
@@ -142,26 +149,28 @@
 
 .plotdetail-section__header h3 {
   margin: 0;
+  color: #fff6cf;
   font-size: 1.15rem;
+  text-shadow: 2px 2px 0 #30251d, 4px 4px 0 rgba(138, 91, 0, 0.45);
 }
 
 .plotdetail-quest-trigger {
   padding: 14px 18px;
-  border: none;
+  border: 2px solid #30251d;
   border-radius: 12px;
-  background:#f7eacc ;
-  color: #503333;
+  background: #f7eacc;
+  color: #30251d;
   font-weight: 700;
   cursor: pointer;
   font-family: 'Dogica Pixel', monospace;
   transition: transform 160ms ease, box-shadow 160ms ease;
-  box-shadow: 4px 4px 0 rgba(43, 33, 24, 0.18);
+  box-shadow: 5px 5px 0 rgba(48, 37, 29, 0.3), 0 8px 16px rgba(48, 37, 29, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.65);
 }
 
 .plotdetail-quest-trigger:hover,
 .plotdetail-sighting-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 7px 18px rgba(26, 38, 30, 0.12);
+  box-shadow: 5px 7px 0 rgba(48, 37, 29, 0.3), 0 10px 18px rgba(48, 37, 29, 0.16);
 }
 
 .plotdetail-quest-trigger:active,
@@ -181,7 +190,7 @@
   flex-direction: column;
   gap: 10px;
   background: #edbe71ab;
-  border: 1px solid rgba(80, 51, 51, 0.2);
+  border: 2px solid rgba(48, 37, 29, 0.42);
   border-radius: 12px;
   padding: 14px 14px 12px;
   font-family: 'Dogica Pixel', monospace;
@@ -196,8 +205,9 @@
 
 .plotdetail-quest-card__title {
   font-weight: 700;
-  color: #503333;
+  color: #fff6cf;
   font-size: 1rem;
+  text-shadow: 2px 2px 0 #30251d;
 }
 
 .plotdetail-quest-card__link {
@@ -207,8 +217,9 @@
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  border: none;
-  color: #503333;
+  border: 2px solid #30251d;
+  color: #30251d;
+  background: #f7eacc;
   text-decoration: none;
   font-weight: 700;
 }
@@ -216,12 +227,13 @@
 .plotdetail-quest-card__name {
   font-size: 1.05rem;
   font-weight: 700;
-  color: #503333;
+  color: #fff6cf;
+  text-shadow: 2px 2px 0 #30251d;
 }
 
 .plotdetail-quest-card__description {
   margin: 0;
-  color: #4d5d52;
+  color: #5b4b3e;
   font-size: 0.9rem;
   line-height: 1.45;
 }
@@ -230,22 +242,22 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  color: #53665a;
+  color: #5b4b3e;
   font-size: 0.77rem;
 }
 
 .plotdetail-quest-card__meta span {
   padding: 4px 7px;
   border-radius: 999px;
-  background: #f7eacc;
+  background: #fff0a8;
 }
 
 .plotdetail-quest-card__steps-trigger {
   padding: 4px 7px;
-  border: none;
+  border: 1px solid rgba(48, 37, 29, 0.35);
   border-radius: 999px;
-  background: #f7eacc;
-  color: inherit;
+  background: #fff0a8;
+  color: #30251d;
   cursor: pointer;
   font-size: 0.77rem;
   font-weight: 400;
@@ -253,13 +265,14 @@
 }
 
 .plotdetail-quest-card__steps-trigger:hover {
-  background: rgba(45, 93, 62, 0.1);
+  background: #f4b942;
 }
 
 .plotdetail-quest-card__steps-expanded {
   margin: 12px 0;
   padding: 12px 14px;
-  background: #edbe71ab;
+  background: rgba(255, 240, 168, 0.72);
+  border: 1px solid rgba(48, 37, 29, 0.22);
   border-radius: 8px;
 }
 
@@ -299,21 +312,21 @@
 }
 
 .plotdetail-quest-card__points {
-  color: #2f6d3f;
+  color: #236d5d;
   font-weight: 700;
 }
 
 .plotdetail-quest-card__action {
   align-self: flex-end;
   padding: 8px 12px;
-  border: none;
-  border-radius: 10px;
-  background:#f7eacc ;
-  color: #503333;
+  border: 2px solid #30251d;
+  border-radius: 12px;
+  background: #f7eacc;
+  color: #30251d;
   font-weight: 700;
   cursor: pointer;
   font-family: 'Dogica Pixel', monospace;
-  box-shadow: 3px 3px 0 rgba(43, 33, 24, 0.16);
+  box-shadow: 3px 3px 0 rgba(48, 37, 29, 0.3);
 }
 
 .plotdetail-quest-card__active-form {
@@ -325,7 +338,7 @@
 
 .plotdetail-quest-card__file {
   width: 100%;
-  color: #2d3b2e;
+  color: #30251d;
   font-family: 'Dogica Pixel', monospace;
   font-size: 0.65rem;
 }
@@ -333,10 +346,10 @@
 .plotdetail-quest-card__file::file-selector-button {
   margin-right: 0.7rem;
   padding: 0.65rem 0.85rem;
-  border: 1px solid rgba(31, 49, 34, 0.35);
-  border-radius: 10px;
-  background: rgba(54, 98, 71, 0.1);
-  color: #1f2a1f;
+  border: 2px solid #30251d;
+  border-radius: 3px;
+  background: #d8e7c4;
+  color: #30251d;
   font-family: 'Dogica Pixel', monospace;
   font-size: 0.58rem;
   cursor: pointer;
@@ -344,7 +357,7 @@
 }
 
 .plotdetail-quest-card__file::file-selector-button:hover {
-  background: rgba(54, 98, 71, 0.18);
+  background: #f4b942;
 }
 
 .plotdetail-quest-card__submit {
@@ -352,8 +365,10 @@
   padding: 8px 12px;
   border: none;
   border-radius: 10px;
-  background:#f7eacc ;
-  color: #1f2a1f;
+  border: 2px solid #30251d;
+  border-radius: 3px;
+  background: #f4b942;
+  color: #30251d;
   font-weight: 700;
   cursor: pointer;
   font-family: 'Dogica Pixel', monospace;
@@ -364,14 +379,15 @@
   width: 100%;
   margin-top: 20px;
   padding: 14px 18px;
+  border: 2px solid #30251d;
   border-radius: 12px;
-  background:#f7eacc ;
-  color: #503333;
+  background: #f7eacc;
+  color: #30251d;
   font-family: 'Dogica Pixel', monospace;
   font-weight: 700;
   cursor: pointer;
   transition: transform 160ms ease, box-shadow 160ms ease;
-  box-shadow: 4px 4px 0 rgba(43, 33, 24, 0.18);
+  box-shadow: 5px 5px 0 rgba(48, 37, 29, 0.3), 0 8px 16px rgba(48, 37, 29, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.65);
 }
 
 .plotdetail-log {
@@ -382,7 +398,9 @@
 
 .plotdetail-log h3 {
   margin: 0 0 12px;
+  color: #fff6cf;
   font-size: 1.15rem;
+  text-shadow: 2px 2px 0 #30251d, 4px 4px 0 rgba(138, 91, 0, 0.45);
 }
 
 .plotdetail-log-list {
@@ -406,11 +424,11 @@
 }
 
 .plotdetail-log-item__label {
-  color: #29372e;
+  color: #30251d;
 }
 
 .plotdetail-log-item__points {
-  color: #2f6d3f;
+  color: #236d5d;
   font-weight: 700;
 }
 

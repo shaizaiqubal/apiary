@@ -142,7 +142,7 @@
   width: min(380px, 70%);
   height: auto;
   object-fit: contain;
-  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
+  filter: drop-shadow(0 10px 0 rgba(48, 37, 29, 0.24)) drop-shadow(0 16px 22px rgba(48, 37, 29, 0.22));
   animation: float-bob 2.5s ease-in-out infinite;
 }
 
@@ -181,11 +181,13 @@
   align-items: center;
   justify-content: center;
   padding: 0;
+  filter: drop-shadow(3px 4px 0 rgba(48, 37, 29, 0.28)) drop-shadow(0 7px 10px rgba(48, 37, 29, 0.18));
   transition: transform 160ms ease, filter 160ms ease;
 }
 
 .plot-carousel__arrow:hover {
   transform: translateY(calc(-50% - 2px));
+  filter: drop-shadow(4px 6px 0 rgba(48, 37, 29, 0.3)) drop-shadow(0 10px 14px rgba(48, 37, 29, 0.22));
 }
 
 .plot-carousel__arrow:active {
@@ -221,21 +223,36 @@
 .plot-carousel__dots {
   display: flex;
   justify-content: center;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
+  gap: 0.6rem;
+  margin-top: 0.75rem;
+  padding: 0.45rem 0.65rem;
+  border: 1px solid rgba(48, 37, 29, 0.2);
+  border-radius: 999px;
+  background: rgba(255, 249, 231, 0.42);
+  box-shadow: 3px 3px 0 rgba(48, 37, 29, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(5px);
 }
 
 .plot-carousel__dot {
-  width: 0.75rem;
-  height: 0.75rem;
+  width: 0.7rem;
+  height: 0.7rem;
   border-radius: 50%;
-  border: 1px solid #1f1f1f;
-  background: rgba(255,255,255,0.6);
+  border: 2px solid #30251d;
+  background: rgba(255, 249, 231, 0.82);
   cursor: pointer;
+  box-shadow: 2px 2px 0 rgba(48, 37, 29, 0.22);
+  transition: transform 160ms ease, background 160ms ease, box-shadow 160ms ease;
+}
+
+.plot-carousel__dot:hover {
+  transform: translateY(-2px);
+  background: #f4b942;
+  box-shadow: 2px 4px 0 rgba(48, 37, 29, 0.25);
 }
 
 .plot-carousel__dot.is-active {
-  background: #1f1f1f;
+  background: #f4b942;
+  box-shadow: 2px 3px 0 rgba(48, 37, 29, 0.3), 0 0 0 2px rgba(255, 246, 207, 0.7);
 }
 
 .plot-carousel__nav {
@@ -263,6 +280,13 @@
   justify-content: center;
   pointer-events: auto;
   position: relative;
+  filter: drop-shadow(4px 5px 0 rgba(48, 37, 29, 0.24)) drop-shadow(0 8px 12px rgba(48, 37, 29, 0.18));
+  transition: transform 160ms ease, filter 160ms ease;
+}
+
+.plot-carousel__nav-link:hover {
+  transform: translateY(-4px);
+  filter: drop-shadow(5px 7px 0 rgba(48, 37, 29, 0.28)) drop-shadow(0 12px 16px rgba(48, 37, 29, 0.22));
 }
 
 .plot-carousel__nav-link img {
@@ -270,7 +294,7 @@
   width: 100px;
   height: 100px;
   object-fit: contain;
-  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.2));
+  filter: drop-shadow(0 3px 0 rgba(48, 37, 29, 0.22));
 }
 
 .plot-carousel__nav-tooltip {
