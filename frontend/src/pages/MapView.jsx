@@ -1,8 +1,18 @@
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
+import { Icon } from 'leaflet'
 import { useState, useEffect } from 'react'
 import { getPlots , getMap} from '../api'
 import { Link } from 'react-router-dom'
+import beePin from '../assets/beepin.png'
 import './MapView.css'
+
+const beePinIcon = new Icon({
+    iconUrl: beePin,
+    iconSize: [56, 56],
+    iconAnchor: [28, 28],
+    popupAnchor: [0, -28],
+    className: 'mapview-bee-pin',
+})
 
 const MapZoomControls = () => {
     const map = useMap()
@@ -54,7 +64,7 @@ const MapView = () => {
                 <MapZoomControls />
 
                 {mapPlots.map((plot) => (
-                    <Marker key={plot.id} position={[plot.latitude, plot.longitude]}>
+                    <Marker key={plot.id} position={[plot.latitude, plot.longitude]} icon={beePinIcon}>
                         <Popup>
                             <strong>{plot.plot_name || 'Apiary plot'}</strong>
                             <br />

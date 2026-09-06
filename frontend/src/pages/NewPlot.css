@@ -15,18 +15,18 @@
 .newplot-header, .newplot-layout { max-width: 1120px; margin: 0 auto; }
 .newplot-header { display: flex; align-items: end; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
 .newplot-kicker, .newplot-label { margin: 0 0 0.65rem; color: rgba(31, 31, 31, 0.6); font-size: 0.55rem; letter-spacing: 0.08em; }
-.newplot-header h1 { margin: 0; font-size: clamp(1.8rem, 5vw, 3.2rem); line-height: 1.05; text-transform: uppercase; }
-.newplot-intro { margin: 0.8rem 0 0; color: #70483e; font-size: 0.65rem; line-height: 1.7; }
+.newplot-header h1 { margin: 0; color: #fff6cf; font-size: clamp(1.8rem, 5vw, 3.2rem); line-height: 1.05; text-shadow: 4px 4px 0 #30251d, 7px 7px 0 rgba(138, 91, 0, 0.5); text-transform: uppercase; }
+.newplot-intro { margin: 0.8rem 0 0; color: #fff6cf; font-size: 0.7rem; line-height: 1.7; text-shadow: 2px 2px 0 #30251d, 3px 3px 0 rgba(138, 91, 0, 0.45); }
 .newplot-level { display: grid; min-width: 74px; padding: 0.6rem; border: 1px solid rgba(31, 49, 34, 0.18); border-radius: 12px; text-align: center; background: rgba(255, 255, 255, 0.56); box-shadow: 3px 3px 0 rgba(43, 33, 24, 0.18); }
 .newplot-level span { font-size: 0.45rem; }
 .newplot-level strong { margin-top: 0.25rem; font-size: 1.35rem; }
 .newplot-layout { display: grid; grid-template-columns: minmax(320px, 0.8fr) minmax(0, 1.2fr); gap: 1.25rem; align-items: start; }
-.newplot-map-panel, .newplot-form { border: 1px solid rgba(31, 49, 34, 0.18); border-radius: 12px; background: #edbe71ab; box-shadow: 5px 5px 0 rgba(43, 33, 24, 0.2), inset 0 1px 0 rgba(255, 248, 223, 0.3); }
+.newplot-map-panel, .newplot-form { border: 2px solid rgba(48, 37, 29, 0.5); border-radius: 12px; background: #edbe71ab; box-shadow: 7px 7px 0 rgba(48, 37, 29, 0.3), 0 12px 24px rgba(48, 37, 29, 0.18), inset 0 2px 0 rgba(255, 248, 223, 0.5), inset 0 -2px 0 rgba(138, 91, 0, 0.16); }
 .newplot-map-panel { padding: 1rem; }
 .newplot-map-panel { grid-column: 2; }
 .newplot-form { grid-column: 1; grid-row: 1; display: flex; flex-direction: column; gap: 1rem; padding: 1.25rem; }
 .newplot-panel-heading { display: flex; justify-content: space-between; align-items: start; gap: 0.7rem; margin-bottom: 0.9rem; }
-.newplot-panel-heading h2 { margin: 0; font-size: 0.9rem; text-transform: uppercase; }
+.newplot-panel-heading h2 { margin: 0; color: #fff6cf; font-size: 0.9rem; text-shadow: 2px 2px 0 #30251d, 4px 4px 0 rgba(138, 91, 0, 0.45); text-transform: uppercase; }
 .newplot-status, .newplot-xp { padding: 0.35rem; color: #1f2a1f; background: rgba(31, 49, 34, 0.12); font-size: 0.45rem; white-space: nowrap; }
 .newplot-xp { color: #2f6d3f; background: rgba(45, 93, 62, 0.14); }
 .newplot-map-frame { height: 390px; overflow: hidden; border: 1px solid rgba(31, 49, 34, 0.18); border-radius: 8px; background: #c9d7b1; box-shadow: 3px 3px 0 rgba(43, 33, 24, 0.16); }
@@ -34,7 +34,7 @@
 .newplot-map-footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 0.85rem; }
 .newplot-map-footer p { margin: 0; color: #75564a; font-size: 0.55rem; line-height: 1.5; }
 .newplot-location-button, .newplot-submit { border: 1px solid rgba(31, 49, 34, 0.35); border-radius: 10px; font-family: 'Dogica Bold', monospace; font-size: 0.55rem; cursor: pointer; }
-.newplot-location-button { padding: 0.7rem; color: #1f2a1f; background: #f9ded4; white-space: nowrap; }
+.newplot-location-button { padding: 0.7rem; color: #1f2a1f; background: #f7eacc; white-space: nowrap; }
 .newplot-location-button:hover, .newplot-submit:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 rgba(43, 33, 24, 0.2); }
 .newplot-location-button:disabled { cursor: wait; opacity: 0.65; }
 .newplot-form label { display: grid; gap: 0.45rem; color: rgba(31, 31, 31, 0.6); font-size: 0.55rem; text-transform: uppercase; }
