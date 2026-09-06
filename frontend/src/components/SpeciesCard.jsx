@@ -1,6 +1,8 @@
-const SpeciesCard = ({species, number}) => {
+const SpeciesCard = ({species, number, onSelect}) => {
+    const rarity = String(species.rarity_tier || "Common").toLowerCase()
+
     return(
-        <article className="species-card">
+        <article className={`species-card species-card--${rarity}`} onClick={onSelect} onKeyDown={(event) => event.key === "Enter" && onSelect?.()} role="button" tabIndex="0" aria-label={`Open details for ${species.common_name}`}>
             <div className="species-card__topline">
                 <span className="species-card__number">#{String(number).padStart(2, "0")}</span>
                 <span className={`species-card__rarity species-card__rarity--${species.rarity_tier.toLowerCase()}`}>
