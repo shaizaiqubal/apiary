@@ -25,7 +25,7 @@
 .plotdetail-quest-card {
   border: none;
   border-radius: 12px;
-  box-shadow: 0 4px 14px rgba(26, 38, 30, 0.06);
+  box-shadow: 5px 5px 0 rgba(43, 33, 24, 0.18), inset 0 1px 0 rgba(255, 248, 223, 0.28);
 }
 
 .plotdetail-header-card {
@@ -110,6 +110,7 @@
   border: none;
   border-radius: 12px;
   padding: 12px 14px;
+  box-shadow: 3px 3px 0 rgba(43, 33, 24, 0.14);
 }
 
 .plotdetail-stat__label {
@@ -154,6 +155,7 @@
   cursor: pointer;
   font-family: 'Dogica Pixel', monospace;
   transition: transform 160ms ease, box-shadow 160ms ease;
+  box-shadow: 4px 4px 0 rgba(43, 33, 24, 0.18);
 }
 
 .plotdetail-quest-trigger:hover,
@@ -311,6 +313,7 @@
   font-weight: 700;
   cursor: pointer;
   font-family: 'Dogica Pixel', monospace;
+  box-shadow: 3px 3px 0 rgba(43, 33, 24, 0.16);
 }
 
 .plotdetail-quest-card__active-form {
@@ -337,6 +340,7 @@
   font-family: 'Dogica Pixel', monospace;
   font-size: 0.58rem;
   cursor: pointer;
+  box-shadow: 2px 2px 0 rgba(43, 33, 24, 0.14);
 }
 
 .plotdetail-quest-card__file::file-selector-button:hover {
@@ -353,6 +357,7 @@
   font-weight: 700;
   cursor: pointer;
   font-family: 'Dogica Pixel', monospace;
+  box-shadow: 3px 3px 0 rgba(43, 33, 24, 0.16);
 }
 
 .plotdetail-sighting-button {
@@ -366,6 +371,7 @@
   font-weight: 700;
   cursor: pointer;
   transition: transform 160ms ease, box-shadow 160ms ease;
+  box-shadow: 4px 4px 0 rgba(43, 33, 24, 0.18);
 }
 
 .plotdetail-log {
