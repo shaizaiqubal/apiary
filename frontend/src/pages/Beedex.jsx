@@ -77,7 +77,7 @@ const Beedex = () => {
             <header className="beedex-header">
                 <div>
                     <h1>Bee-dex</h1>
-                    <p className="beedex-subtitle">Meet the pollinators in your neighborhood.</p>
+                    <p className="beedex-subtitle">Find them All!</p>
                 </div>
                 <div className="beedex-counter" aria-label={`${beedex.length} bees shown`}>
                     <strong>{beedex.length}</strong>
@@ -123,7 +123,7 @@ const Beedex = () => {
                     <section className={`beedex-modal__panel beedex-modal__panel--${String(selectedBee.species.rarity_tier || "common").toLowerCase()}`} role="dialog" aria-modal="true" aria-labelledby="beedex-modal-title" onClick={(event) => event.stopPropagation()}>
                         <button className="beedex-modal__close" type="button" onClick={() => setSelectedBee(null)} aria-label="Close bee details">×</button>
                         <div className={`beedex-modal__rarity beedex-modal__rarity--${String(selectedBee.species.rarity_tier || "common").toLowerCase()}`}>
-                            {selectedBee.species.rarity_tier} ENTRY
+                            {selectedBee.species.rarity_tier} 
                         </div>
                         <div className="beedex-modal__content">
                             <div className="beedex-modal__image-wrap">
@@ -134,15 +134,14 @@ const Beedex = () => {
                                 />
                             </div>
                             <div className="beedex-modal__details">
-                                <p className="beedex-modal__number">FIELD GUIDE #{String(selectedBee.number).padStart(2, "0")}</p>
+                                <p className="beedex-modal__number">#{String(selectedBee.number).padStart(2, "0")}</p>
                                 <h2 id="beedex-modal-title">{selectedBee.species.common_name}</h2>
                                 <p className="beedex-modal__scientific"><em>{selectedBee.species.scientific_name}</em></p>
                                 <div className="beedex-modal__stats">
                                     <span>RARITY <strong>{selectedBee.species.rarity_tier}</strong></span>
-                                    <span>FIELD XP <strong>+{selectedBee.species.points}</strong></span>
+                                    <span>POINTS <strong>+{selectedBee.species.points}</strong></span>
                                 </div>
                                 <div className="beedex-modal__summary">
-                                    <span>FIELD GUIDE SUMMARY</span>
                                     <p>{selectedBee.species.fun_facts}</p>
                                 </div>
                             </div>

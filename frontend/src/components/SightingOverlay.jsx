@@ -32,6 +32,11 @@ const SightingOverlay = ({ plotId, onClose }) =>{
     const [sightingId,setSightingId] = useState(null)
     const [speciesId,setSpeciesId] = useState(null)
     const [isMinimized, setIsMinimized] = useState(false)
+    const [error, setError] = useState('')
+
+    const getErrorMessage = (requestError, fallback) => (
+        requestError.response?.data?.detail || fallback
+    )
 
     const handleFileChange = (e) =>{
         setImage(e.target.files[0])
@@ -39,24 +44,35 @@ const SightingOverlay = ({ plotId, onClose }) =>{
 
     const handleSubmit = async(e) => {
         e.preventDefault()
+        setError('')
         setPhase("loading")
         const formData = new FormData
         formData.append('plot_id', plotId)
         formData.append('photo',image)
 
-        const data = await logSighting(formData)
-        setCandidates(data)
-        setSightingId(data.sighting_id)
-        setPhase("confirm")
-        console.log(data)
+        try {
+            const data = await logSighting(formData)
+            setCandidates(data)
+            setSightingId(data.sighting_id)
+            setPhase("confirm")
+        } catch (requestError) {
+            setError(getErrorMessage(requestError, 'The bee image could not be processed.'))
+            setPhase("capture")
+        }
     }
 
     const handleSpeciesSubmit = async(e) => {
         e.preventDefault()
+        setError('')
         setPhase("loading")
-        const data = await confirmSighting(sightingId,speciesId)
-        setResult(data)
-        setPhase("result")
+        try {
+            const data = await confirmSighting(sightingId,speciesId)
+            setResult(data)
+            setPhase("result")
+        } catch (requestError) {
+            setError(getErrorMessage(requestError, 'The sighting could not be confirmed.'))
+            setPhase("confirm")
+        }
     }
     let content = null
 
@@ -64,6 +80,7 @@ const SightingOverlay = ({ plotId, onClose }) =>{
         content = (
             <form onSubmit={handleSubmit} className="sighting-overlay__form">
                 <p className="sighting-overlay__prompt">Upload a photo to identify the bee.</p>
+                {error && <p className="sighting-overlay__message sighting-overlay__message--error">{error}</p>}
                 <input className="sighting-overlay__file" type="file" accept="image/*" onChange={handleFileChange} required/>
                 <button className="sighting-overlay__action sighting-overlay__submit" type="submit">Submit photo</button>
             </form>
@@ -76,6 +93,7 @@ const SightingOverlay = ({ plotId, onClose }) =>{
             content = (
                 <form onSubmit={handleSpeciesSubmit} className="sighting-overlay__form sighting-overlay__form--confirmation">
                     <p className="sighting-overlay__prompt">What species do you think it is?</p>
+                    {error && <p className="sighting-overlay__message sighting-overlay__message--error">{error}</p>}
 
                     <p className="sighting-overlay__candidates">
                         {JSON.stringify(candidates.candidates)}

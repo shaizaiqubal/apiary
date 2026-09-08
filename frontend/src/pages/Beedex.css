@@ -2,7 +2,7 @@
   min-height: 100vh;
   padding: 2.5rem clamp(1.25rem, 5vw, 5rem) 4rem;
   color: #1f1f1f;
-  background-image: url('../assets/beedex-bg.png');
+  background-image: url('../assets/beedex.png');
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -10,6 +10,7 @@
 }
 
 .beedex-header {
+  position: relative;
   display: flex;
   align-items: end;
   justify-content: space-between;
@@ -17,7 +18,6 @@
   max-width: 1120px;
   margin: 0 auto 2rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(31, 49, 34, 0.18);
 }
 
 .beedex-kicker {
@@ -51,11 +51,10 @@
   padding: 0.8rem;
   text-align: center;
   border: 2px solid #1f1f1f;
-  background: rgba(255, 255, 255, 0.56);
+  background: rgba(255, 248, 223, 0.82);
   color: #1f2a1f;
-  border: 1px solid rgba(31, 49, 34, 0.18);
-  border-radius: 12px;
-  box-shadow: 0 4px 14px rgba(26, 38, 30, 0.06);
+  align-self: self-start;
+
 }
 
 .beedex-counter strong { font-size: 1.5rem; }
@@ -66,7 +65,7 @@
 .beedex-filter__button:hover, .beedex-filter__button[aria-pressed="true"] { background: #f4b942; color: #30251d; }
 .beedex-filter__button:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 rgba(43, 33, 24, 0.24); }
 .beedex-sort { display: inline-flex; align-items: center; gap: 0.45rem; margin-left: auto; padding-left: 0.45rem; border-left: 2px solid rgba(48, 37, 29, 0.3); color: #5b4b3e; font-size: 0.48rem; text-transform: uppercase; }
-.beedex-sort select { padding: 0.65rem 1.8rem 0.65rem 0.7rem; border: 2px solid #30251d; border-radius: 2px; color: #30251d; background: #fff0a8; box-shadow: 2px 2px 0 rgba(43, 33, 24, 0.2); font: 0.55rem 'Dogica Bold', monospace; cursor: pointer; }
+.beedex-sort select { padding: 0.65rem 1.8rem 0.65rem 0.7rem; border: 2px solid #30251d; border-radius: 2px; color: #30251d; background: rgba(255, 248, 223, 0.82); box-shadow: 2px 2px 0 rgba(43, 33, 24, 0.2); font: 0.55rem 'Dogica Bold', monospace; cursor: pointer; }
 .beedex-sort select:focus-visible { outline: 2px solid #e4a928; outline-offset: 1px; }
 
 .beedex-carousel {
@@ -222,7 +221,7 @@
 .species-card__details { padding: 0.75rem 0.9rem; }
 
 .species-card--common {
-  border-color: #5f5545;
+  border-color: #8d5f17;
   background: #fff9e7;
 }
 .species-card--common::before { border-style: dashed; border-color: rgba(95, 85, 69, 0.45); }
@@ -351,9 +350,9 @@
 .beedex-modal__stats { display: flex; flex-wrap: wrap; gap: 0.55rem; margin-bottom: 1.1rem; }
 .beedex-modal__stats span { padding: 0.5rem 0.65rem; border: 1px solid rgba(43, 33, 24, 0.3); border-radius: 3px; color: #5b4b3e; font-size: 0.48rem; }
 .beedex-modal__stats strong { margin-left: 0.35rem; color: #236d5d; font-size: 0.58rem; }
-.beedex-modal__summary { padding: 0.85rem; border: 2px dashed rgba(43, 33, 24, 0.4); border-radius: 3px; background: #fff3c6; }
+.beedex-modal__summary { padding: 0.85rem; border: 2px dashed rgba(43, 33, 24, 0.4); border-radius: 3px; background: #fff3c680; }
 .beedex-modal__summary > span { color: #8a5b00; font-size: 0.5rem; letter-spacing: 0.08em; }
-.beedex-modal__summary p { margin: 0.65rem 0 0; color: #30251d; font-size: 0.65rem; line-height: 1.8; }
+.beedex-modal__summary p {color: #30251d; font-size: 0.65rem; line-height: 1.8; }
 
 @media (max-width: 560px) {
   .beedex-page { padding-top: 1.5rem; }

@@ -26,7 +26,7 @@
 .mapview-overlay,
 .mapview-zoom-controls {
   border: 2px solid rgba(48, 37, 29, 0.42);
-  border-radius: 12px;
+  border-radius: 4px;
   background: rgba(255, 249, 231, 0.22);
   box-shadow: 5px 5px 0 rgba(48, 37, 29, 0.24), 0 10px 22px rgba(48, 37, 29, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(8px);
@@ -123,6 +123,58 @@
   color: #2f6d3f;
   font-family: 'Dogica Bold', monospace;
   font-size: 0.52rem;
+}
+
+.mapview-page .leaflet-tooltip {
+  border: 1px solid rgba(31, 49, 34, 0.18);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 14px rgba(26, 38, 30, 0.14);
+  color: #1f2a1f;
+  font-family: 'Dogica Pixel', monospace;
+  font-size: 0.58rem;
+  line-height: 1.7;
+}
+
+.mapview-page .mapview-tooltip {
+  display: flex;
+  min-width: 120px;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  text-align: center;
+}
+
+.mapview-page .mapview-tooltip__name {
+  color: #503333;
+  font-family: 'Dogica Bold', monospace;
+  font-size: 0.65rem;
+}
+
+.mapview-page .mapview-tooltip__type {
+  color: #503333;
+  font-size: 0.52rem;
+}
+
+.mapview-page .mapview-tooltip__level {
+  font-family: 'Dogica Bold', monospace;
+  font-size: 0.52rem;
+}
+
+.mapview-page .mapview-tooltip__level--seedling {
+  color: #5d8c3e;
+}
+
+.mapview-page .mapview-tooltip__level--garden {
+  color: #3c78a8;
+}
+
+.mapview-page .mapview-tooltip__level--habitat {
+  color: #b26a2c;
+}
+
+.mapview-page .mapview-tooltip__level--sanctuary {
+  color: #8a4d91;
 }
 
 @media (max-width: 600px) {

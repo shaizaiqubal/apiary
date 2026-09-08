@@ -119,6 +119,14 @@
   box-shadow: 3px 3px 0 rgba(43, 33, 24, 0.1);
 }
 
+.sighting-overlay__message--error {
+  padding: 0.7rem;
+  border: 1px solid rgba(145, 54, 54, 0.25);
+  border-radius: 3px;
+  background: rgba(145, 54, 54, 0.07);
+  color: #913636;
+}
+
 .sighting-overlay__file,
 .sighting-overlay__input {
   width: 100%;

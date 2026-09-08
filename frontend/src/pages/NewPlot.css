@@ -33,16 +33,20 @@
 .newplot-map { width: 100%; height: 100%; }
 .newplot-map-footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 0.85rem; }
 .newplot-map-footer p { margin: 0; color: #75564a; font-size: 0.55rem; line-height: 1.5; }
-.newplot-location-button, .newplot-submit { border: 1px solid rgba(31, 49, 34, 0.35); border-radius: 10px; font-family: 'Dogica Bold', monospace; font-size: 0.55rem; cursor: pointer; }
-.newplot-location-button { padding: 0.7rem; color: #1f2a1f; background: #f7eacc; white-space: nowrap; }
-.newplot-location-button:hover, .newplot-submit:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 rgba(43, 33, 24, 0.2); }
+.newplot-location-button, .newplot-submit { border: 2px solid #30251d; border-radius: 12px; font-family: 'Dogica Pixel', monospace; font-size: 0.55rem; cursor: pointer; transition: transform 160ms ease, box-shadow 160ms ease; box-shadow: 5px 5px 0 rgba(48, 37, 29, 0.3), 0 8px 16px rgba(48, 37, 29, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.65); }
+.newplot-location-button { padding: 14px 18px; color: #30251d; background: #f7eacc; white-space: nowrap; }
+.newplot-location-button:hover, .newplot-submit:hover { transform: translateY(-2px); box-shadow: 5px 7px 0 rgba(48, 37, 29, 0.3), 0 10px 18px rgba(48, 37, 29, 0.16); }
+.newplot-location-button:active, .newplot-submit:active { transform: translateY(1px); box-shadow: none; }
 .newplot-location-button:disabled { cursor: wait; opacity: 0.65; }
 .newplot-form label { display: grid; gap: 0.45rem; color: rgba(31, 31, 31, 0.6); font-size: 0.55rem; text-transform: uppercase; }
 .newplot-form input, .newplot-form select { width: 100%; padding: 0.8rem; border: 1px solid rgba(31, 49, 34, 0.25); border-radius: 8px; color: #1f2a1f; background: rgba(255, 255, 255, 0.8); box-shadow: inset 0 2px 0 rgba(43, 33, 24, 0.08); font: 0.65rem 'Dogica Pixel', monospace; }
 .newplot-form input:focus, .newplot-form select:focus { outline: 2px solid rgba(45, 93, 62, 0.35); outline-offset: 2px; }
 .newplot-form-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 0.8rem; }
 .newplot-error { margin: -0.4rem 0 0; padding: 0.65rem; color: #8a3027; border: 1px solid #d88d7c; background: #f9ded4; font-size: 0.55rem; line-height: 1.5; }
-.newplot-submit { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding: 0.9rem 1rem; color: #1f2a1f; background: #f7eacc; }
+.newplot-submit { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding: 14px 18px; color: #30251d; background: #f7eacc;     font-weight: 700;
+    cursor: pointer;
+    font-family: 'Dogica Pixel', monospace;
+}
 .newplot-submit span:last-child { font-size: 1rem; }
 
 @media (max-width: 760px) {

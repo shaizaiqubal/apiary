@@ -6,6 +6,7 @@ const QuestCard = ({quest, plotId, onSubmitted}) => {
     const [active, setActive] = useState()
     const [image, setImage] = useState()
     const [expandedSteps, setExpandedSteps] = useState(null)
+    const [error, setError] = useState('')
 
     const plantQuest = quest.plant_quest
     const nestingQuest = quest.nesting_quest
@@ -16,6 +17,7 @@ const QuestCard = ({quest, plotId, onSubmitted}) => {
 
     const handleSubmit = async(e) => {
         e.preventDefault()
+        setError('')
         const formData = new FormData()
         formData.append('plot_id', plotId)
         formData.append('photo', image)
@@ -26,12 +28,17 @@ const QuestCard = ({quest, plotId, onSubmitted}) => {
             formData.append('action_id', nestingQuest.action_id)
         }
 
-        const result = await logQuest(formData)
-        console.log(result)
-
-        setActive(null)
-        setImage(null)
-        onSubmitted?.()
+        try {
+            await logQuest(formData)
+            setActive(null)
+            setImage(null)
+            onSubmitted?.()
+        } catch (requestError) {
+            setError(
+                requestError.response?.data?.detail ||
+                'The quest could not be submitted.'
+            )
+        }
     }
 
     const renderQuestCard = ({
@@ -99,13 +106,14 @@ const QuestCard = ({quest, plotId, onSubmitted}) => {
 
             <div className="plotdetail-quest-card__bottom">
                 <span className="plotdetail-quest-card__points">{points}</span>
-                <button type="button" className="plotdetail-quest-card__action" onClick={() => setActive(type)}>
+                <button type="button" className="plotdetail-quest-card__action" onClick={() => { setError(''); setActive(type) }}>
                     {actionLabel}
                 </button>
             </div>
 
             {active === type && (
                 <div className="plotdetail-quest-card__active-form">
+                    {error && <p className="plotdetail-quest-card__error" role="alert">{error}</p>}
                     <input type="file" accept="image/*" onChange={handleFileChange} className="plotdetail-quest-card__file" />
                     <button type="button" className="plotdetail-quest-card__submit" onClick={handleSubmit}>Submit photo</button>
                 </div>

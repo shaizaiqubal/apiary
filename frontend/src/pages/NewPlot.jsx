@@ -80,7 +80,7 @@ const NewPlot = () =>{
                     <div className="newplot-map-footer">
                         <p>{coords ? "Pin locked. You can move it by clicking another spot." : "Click anywhere on the map to place your pin."}</p>
                         <button className="newplot-location-button" type="button" onClick={getCurrentLocation} disabled={isLocating}>
-                            <span aria-hidden="true">+</span> {isLocating ? "SEARCHING..." : "USE MY LOCATION"}
+                            <span aria-hidden="true">+</span> <b>{isLocating ? "SEARCHING..." : "USE MY LOCATION"}</b>
                         </button>
                     </div>
                 </section>
@@ -91,7 +91,7 @@ const NewPlot = () =>{
                     {locationError && <p className="newplot-error" role="alert">{locationError}</p>}
                     <label>Plot name<input type="text" name="plot_name" value={plot.plot_name} onChange={handleChange} placeholder="e.g. Rooftop meadow" required /></label>
                     <div className="newplot-form-grid">
-                        <label>Area (m2)<input type="number" name="area_sq_m" value={plot.area_sq_m} onChange={handleChange} placeholder="Optional" min="0" /></label>
+                        <label>Area (m2)<input type="number" name="area_sq_m" value={plot.area_sq_m} onChange={handleChange} placeholder="e.g. 3" min="0" /></label>
                         <label>Sunlight<select name="sun_shade" value={plot.sun_shade} onChange={handleChange}><option value="">Choose one</option><option value="full_sun">Full sun</option><option value="partial_shade">Partial shade</option><option value="full_shade">Full shade</option></select></label>
                     </div>
                     <label>Habitat type<select name="plot_type" value={plot.plot_type} onChange={handleChange}><option value="">Choose one</option><option value="1">Balcony Pot</option><option value="2">Small Garden</option><option value="3">Large Garden</option><option value="4">Allotment</option></select></label>

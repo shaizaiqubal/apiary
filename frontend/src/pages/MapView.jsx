@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Tooltip, useMap } from 'react-leaflet'
 import { Icon } from 'leaflet'
 import { useState, useEffect } from 'react'
 import { getPlots , getMap} from '../api'
@@ -29,6 +29,7 @@ const MapZoomControls = () => {
 const MapView = () => {
     const [plots,setPlots] = useState([])
     const [mapPlots,setMapPlots] = useState([])
+    const plotMap = {1:'Balcony pot',2:'Small garden',3:'Large garden',4:'Allotment'}
 
     useEffect(() => {
         const fetchPlots = async() => {
@@ -65,11 +66,15 @@ const MapView = () => {
 
                 {mapPlots.map((plot) => (
                     <Marker key={plot.id} position={[plot.latitude, plot.longitude]} icon={beePinIcon}>
-                        <Popup>
-                            <strong>{plot.plot_name || 'Apiary plot'}</strong>
-                            <br />
-                            <Link to={`/plot/${plot.id}`}>OPEN PLOT</Link>
-                        </Popup>
+                        <Tooltip direction="top" offset={[0, -28]} opacity={0.95}>
+                            <div className="mapview-tooltip">
+                                <strong className="mapview-tooltip__name">{plot.plot_name || 'Apiary plot'}</strong>
+                                <span className="mapview-tooltip__type">{plotMap[plot.plot_type] || 'Garden'}</span>
+                                <span className={`mapview-tooltip__level mapview-tooltip__level--${String(plot.milestone || 'Seedling').toLowerCase()}`}>
+                                    {plot.milestone || 'Seedling'}
+                                </span>
+                            </div>
+                        </Tooltip>
                     </Marker>
                 ))}
         </MapContainer>
@@ -84,7 +89,7 @@ const MapView = () => {
                 <span>Add plot</span>
             </Link>
 
-            <p className="mapview-hint mapview-overlay">Tap a pin to view that plot</p>
+            <p className="mapview-hint mapview-overlay">Hover over a pin to view that plot</p>
         </main>
     )
 }
