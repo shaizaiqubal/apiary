@@ -59,6 +59,23 @@ def get_user_plots(user_id: str = Depends(get_current_user_id)) -> list[Plot]:
 
     return [plot for plot in res]
 
+
+@router.get('/map/all', response_model=list[dict])
+def get_plot_map() -> list[dict]:
+    with SessionLocal() as db:
+        plots = db.execute(select(Plot)).scalars().all()
+    return [
+        {
+            "id": p.id,
+            "plot_name": p.plot_name,
+            "latitude": p.latitude,
+            "longitude": p.longitude,
+            "plot_type": p.plot_type,
+            "milestone": p.milestone,
+        }
+        for p in plots
+    ]
+
 @router.get('/{plot_id}',response_model=PlotSchema)
 def get_plot(plot_id: int, user_id: str = Depends(get_current_user_id)) -> Plot:
     with SessionLocal() as db:
@@ -85,19 +102,3 @@ def get_plot(plot_id: int, user_id: str = Depends(get_current_user_id)) -> Plot:
 
     return res
 
-
-
-@router.get('/map/all', response_model=list[dict])
-def get_plot_map() -> list[dict]:
-    with SessionLocal() as db:
-        plots = db.execute(select(Plot)).scalars().all()
-    return [
-        {
-            "id": p.id,
-            "plot_name": p.plot_name,
-            "latitude": p.latitude,
-            "longitude": p.longitude,
-            "milestone": p.milestone,
-        }
-        for p in plots
-    ]
