@@ -9,6 +9,7 @@ from backend.app.services.verification import verify_sighting
 from backend.app.services.storage import upload_image
 from backend.app.routers.users import get_user_or_404
 from backend.app.dependencies import update_milestone, get_image_hash
+from backend.app.services.image_validation import validate_image_content_type, validate_image_size
 from backend.schemas import SightingSchema
 
 router = APIRouter(prefix="/sightings", tags=["sightings"])
@@ -31,14 +32,9 @@ async def post_sightings(
                     detail="Plot Not Found"
                 )
         
-        if not photo.content_type:
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail="Missing photo content type",
-            )
-
+        content_type = validate_image_content_type(photo)
         image_bytes = await photo.read()
-        content_type = photo.content_type
+        validate_image_size(image_bytes)
         extension = content_type.split("/")[-1]
         hash = get_image_hash(image_bytes)
         object_name = f"submissions/{hash}.{extension}"
@@ -48,15 +44,12 @@ async def post_sightings(
         if duplicate:
              return {"status":"declined", "reason":"image_already_exists"}
 
-        upload = upload_image(image_bytes,object_name,content_type)
-
-        if not upload:
-            print("Image storage failed")
-
         image_verify = verify_sighting(image_bytes, content_type) 
 
         if image_verify.status == "not_a_bee":
              return {"status": "not_a_bee", "reason": image_verify.reasoning}
+
+        upload_image(image_bytes, object_name, content_type)
 
         candidates_json = None
         if image_verify.candidates is not None:
@@ -108,7 +101,25 @@ user_id: str = Depends(get_current_user_id)) -> Sighting:
                  status_code=status.HTTP_404_NOT_FOUND,
                  detail="Species Not Found"
                 )
-        found = db.execute(select(Sighting).where(Sighting.species_id== species_id, Sighting.verified_status == "confirmed")).scalar_one_or_none()
+
+        plot = db.execute(
+            select(Plot).where(
+                Plot.id == sighting.plot_id,
+                Plot.user_id == user_id,
+            )
+        ).scalar_one_or_none()
+
+        if not plot:
+            raise HTTPException(status_code=404, detail="Plot Not Found")
+        
+        found = db.execute(
+                select(Sighting)
+                .join(Plot, Sighting.plot_id == Plot.id)
+                .where(
+                    Plot.user_id == user_id,
+                    Sighting.species_id == species_id,
+                    Sighting.verified_status == "confirmed",
+                )).scalar_one_or_none()
         if found:
             sighting.points_awarded = 5
         else:
