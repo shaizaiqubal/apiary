@@ -1,9 +1,15 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi import Request
+from fastapi.responses import JSONResponse
 from contextlib import asynccontextmanager
+import logging
 
 from backend.database import Base,engine
 from backend.app.routers import beedex, quests, sightings, users, plot
+from backend.app.errors import ServiceError
+
+logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -11,6 +17,31 @@ async def lifespan(app: FastAPI):
     yield
 
 app = FastAPI(title="Apiary API", lifespan=lifespan)
+
+@app.exception_handler(ServiceError)
+async def service_error_handler(request: Request, exc: ServiceError) -> JSONResponse:
+    logger.error("Service failure on %s %s: %s", request.method, request.url.path, exc.detail)
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={"error": exc.code, "detail": exc.detail},
+    )
+
+@app.exception_handler(Exception)
+async def unexpected_error_handler(request: Request, exc: Exception) -> JSONResponse:
+    logger.error(
+        "Unhandled API error on %s %s",
+        request.method,
+        request.url.path,
+        exc_info=(type(exc), exc, exc.__traceback__),
+    )
+    return JSONResponse(
+        status_code=500,
+        content={
+            "error": "internal_server_error",
+            "detail": "An unexpected server error occurred",
+        },
+    )
+
 
 app.add_middleware(
     CORSMiddleware,

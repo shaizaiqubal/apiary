@@ -1,5 +1,6 @@
 import base64
 import json
+import logging
 import os
 from pathlib import Path
 from google import genai
@@ -9,11 +10,13 @@ from dotenv import load_dotenv
 from backend.database import SessionLocal
 from sqlalchemy.sql import select
 from backend.models import Species
+from backend.app.errors import VerificationServiceError
 
 load_dotenv()
 
 API_KEY = os.getenv("GEMINI_API_KEY")
 _PROMPT_DIR = Path(__file__).resolve().parent
+logger = logging.getLogger(__name__)
 
 class VerifyQuest(BaseModel):
     status: Literal["verified", "rejected"]
@@ -91,7 +94,8 @@ def verify_quest(image_bytes: bytes, mime_type: str, expected: str) -> dict:
         result = VerifyQuest.model_validate_json(interaction.output_text)  # type: ignore
         return result.model_dump()  
     except Exception as exc:
-        raise RuntimeError(f"Image verification failed: {exc}") from exc
+        logger.exception("Gemini quest verification failed")
+        raise VerificationServiceError("Image verification is temporarily unavailable") from exc
 
 
 def verify_sighting(image_bytes: bytes, mime_type: str) -> CandidateList:
@@ -152,5 +156,6 @@ def verify_sighting(image_bytes: bytes, mime_type: str) -> CandidateList:
         return CandidateList.model_validate_json(interaction.output_text) #type: ignore
     
     except Exception as exc:
-        raise RuntimeError(f"Image verification failed: {exc}") from exc
+        logger.exception("Gemini sighting verification failed")
+        raise VerificationServiceError("Image verification is temporarily unavailable") from exc
     

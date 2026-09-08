@@ -8,12 +8,7 @@ def get_image_hash(image_bytes: bytes) -> str:
     return hashlib.sha256(image_bytes).hexdigest()
 
 def get_current_user_id(x_user_id: str | None = Header(default=None, alias="X-User-ID")) -> str:
-    """
-    Temporary identity abstraction for Stage 1.
 
-    This is not authentication. It only extracts the current user's UUID from
-    the X-User-ID header until real auth is implemented.
-    """
     if not x_user_id:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
