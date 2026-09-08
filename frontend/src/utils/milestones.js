@@ -7,7 +7,8 @@ export const MILESTONE_THRESHOLDS = {
 
 const normalizeMilestone = (milestone) => {
   if (!milestone) return 'Seedling'
-  return String(milestone).trim()
+  const normalized = String(milestone).trim().toLowerCase()
+  return normalized.charAt(0).toUpperCase() + normalized.slice(1)
 }
 
 export function getProgressToNextMilestone(milestone, points) {
