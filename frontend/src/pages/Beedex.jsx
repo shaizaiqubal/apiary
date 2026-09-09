@@ -8,6 +8,7 @@ const Beedex = () => {
     const [loading, setLoading] = useState(true)
     const [showUnlocked, setShowUnlocked] = useState(false)
     const [beedex, setBeedex] = useState([])
+    const [discoveredIds, setDiscoveredIds] = useState(new Set())
     const [selectedIndex, setSelectedIndex] = useState(0)
     const [selectedBee, setSelectedBee] = useState(null)
     const [sortMode, setSortMode] = useState("serial")
@@ -27,8 +28,12 @@ const Beedex = () => {
             setLoading(true)
             setBeedex([])
             try {
-                const data = showUnlocked ? await getBeedex() : await getUserBeedex()
-                setBeedex(data)
+                const [allSpecies, discoveredSpecies] = await Promise.all([
+                    getBeedex(),
+                    getUserBeedex().catch(() => []),
+                ])
+                setBeedex(showUnlocked ? discoveredSpecies : allSpecies)
+                setDiscoveredIds(new Set(discoveredSpecies.map((species) => species.species_id)))
             } catch {
                 setBeedex([])
             } finally {
@@ -87,7 +92,7 @@ const Beedex = () => {
 
             <nav className="beedex-filter" aria-label="Bee collection filter and sorting">
                 <button className="beedex-filter__button" onClick={toggleFilter} type="button" aria-pressed={showUnlocked}>
-                    {showUnlocked ? "Show discovered" : "Show all bees"}
+                    {showUnlocked ? "Show all bees" : "Show discovered only"}
                 </button>
                 <label className="beedex-sort">
                     <span>Sort by</span>
@@ -110,7 +115,7 @@ const Beedex = () => {
                         <div className="beedex-carousel__container">
                             {sortedBeedex.map((species, index) =>
                                 <div className="beedex-carousel__slide" key={species.species_id}>
-                                    <SpeciesCard species={species} number={species.species_id || index + 1} onSelect={() => setSelectedBee({ species, number: species.species_id || index + 1 })} />
+                                    <SpeciesCard species={species} discovered={discoveredIds.has(species.species_id)} number={species.species_id || index + 1} onSelect={() => setSelectedBee({ species, number: species.species_id || index + 1 })} />
                                 </div>
                             )}
                         </div>
@@ -129,8 +134,13 @@ const Beedex = () => {
                             <div className="beedex-modal__image-wrap">
                                 <img
                                     className="beedex-modal__image"
-                                    src={selectedBee.species.latest_image?.url || "/bees/default-bee.jpg"}
+                                    src={`/bees/${selectedBee.species.species_id}.${({1: "png", 2: "JPG", 3: "jpg", 4: "jpg", 5: "jpg", 6: "jpg", 7: "jpg", 8: "jpg", 9: "webp", 10: "jpg"})[selectedBee.species.species_id] || "png"}`}
                                     alt={selectedBee.species.common_name}
+                                    onError={(event) => {
+                                        if (event.currentTarget.dataset.fallback) return
+                                        event.currentTarget.dataset.fallback = "true"
+                                        event.currentTarget.src = "/bees/default-bee.jpg"
+                                    }}
                                 />
                             </div>
                             <div className="beedex-modal__details">

@@ -4,7 +4,6 @@ from sqlalchemy import select
 from backend.database import SessionLocal
 from backend.models import Species, Sighting, Plot
 from backend.schemas import SpeciesSchema, UserSpeciesSchema
-from backend.app.services.storage import get_signed_image_url
 
 router = APIRouter(prefix="/beedex", tags=["beedex"])
 
@@ -53,16 +52,6 @@ def get_user_beedex(user_id: str = Depends(get_current_user_id)) -> list[UserSpe
 
         result = []
         for species in species_list:
-            sighting = latest_sightings[species.species_id]
-            image_url = get_signed_image_url(sighting.image_key)
-            latest_image = None
-            if image_url:
-                latest_image = {
-                    "url": image_url,
-                    "sighting_id": sighting.id,
-                    "timestamp": sighting.timestamp,
-                }
-
             result.append({
                 "species_id": species.species_id,
                 "common_name": species.common_name,
@@ -70,7 +59,6 @@ def get_user_beedex(user_id: str = Depends(get_current_user_id)) -> list[UserSpe
                 "rarity_tier": species.rarity_tier,
                 "points": species.points,
                 "fun_facts": species.fun_facts,
-                "latest_image": latest_image,
             })
 
         return result

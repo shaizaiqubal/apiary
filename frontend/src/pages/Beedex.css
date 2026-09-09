@@ -165,6 +165,10 @@
   object-fit: cover;
 }
 
+.species-card--undiscovered .species-card__image {
+  filter: grayscale(1) contrast(0.75) brightness(1.15);
+}
+
 .species-card__image + .species-card__bee { display: none; }
 .species-card__image[hidden] + .species-card__bee { display: block; }
 
