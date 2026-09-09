@@ -3,6 +3,7 @@ import useEmblaCarousel from "embla-carousel-react"
 import { getPlots } from "../api"
 import { Link } from "react-router-dom"
 import PlotCard from "../components/PlotCard"
+import LoadingState from "../components/LoadingState"
 import "./PlotCarousel.css"
 
 const PlotCarousel = () => {
@@ -54,7 +55,7 @@ const PlotCarousel = () => {
     }, [emblaApi, slides.length])
 
     if (isLoading){
-        return(<p>Loading....</p>)
+        return <LoadingState routeName="plot carousel" />
     }
     if (plots.length===0){
         return(

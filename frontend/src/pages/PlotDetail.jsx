@@ -4,6 +4,7 @@ import { getPlot, getQuest } from "../api"
 import QuestCard from "../components/QuestCard"
 import SightingOverlay from "../components/SightingOverlay"
 import ProgressBar from "../components/ProgressBar"
+import LoadingState from "../components/LoadingState"
 import "./PlotDetail.css"
 
 const toSentenceCase = (value) => {
@@ -18,6 +19,7 @@ const PlotDetail = () => {
     const [quest, setQuest] = useState({})
     const [showQuest, setShowQuest] = useState(false)
     const [showSighting, setShowSighting] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
 
     const fetchQuest = async() => {
         const data = await getQuest(plotId)
@@ -35,9 +37,14 @@ const PlotDetail = () => {
         const fetchPlot = async() => {
             const data = await getPlot(plotId)
             setPlot(data)
+            setIsLoading(false)
         }
         fetchPlot()
     }, [plotId])
+
+    if (isLoading) {
+        return <LoadingState routeName="plot details" />
+    }
 
     const plotMap = {1:'balcony pot',2:'small garden',3:'large garden',4:'allotment'}
     const confirmedSightings = plot.sightings?.filter(
