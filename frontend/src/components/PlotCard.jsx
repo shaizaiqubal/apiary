@@ -8,8 +8,8 @@ const PlotCard = ({ plot }) => {
     const plotMap = {1:'balcony pot',2:'small garden',3:'large garden',4:'allotment'}
     const { pointsToNext } = getProgressToNextMilestone(plot.milestone, plot.points)
     const currentPoints = Number(plot.points) || 0
-    const milestone = String(plot.milestone || 'Seedling').trim()
-        .replace(/^./, (letter) => letter.toUpperCase())
+    const normalizedMilestone = String(plot.milestone || 'Seedling').trim().toLowerCase()
+    const milestone = normalizedMilestone.charAt(0).toUpperCase() + normalizedMilestone.slice(1)
     const plotImage = milestone === 'Seedling'
         ? seedlingImage
         : milestone === 'Sanctuary'

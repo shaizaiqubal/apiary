@@ -8,18 +8,22 @@
   align-items: center;
   padding: 1rem;
   box-sizing: border-box;
-  background-image: url('../assets/carousel.jpeg');
-  background-position: bottom;
-  background-repeat: no-repeat;
 }
 
 .plot-carousel::before {
   content: "";
-  position: absolute;
+  position: fixed;
   inset: 0;
+  z-index: 0;
+  background: url('../assets/carousel.jpeg') center bottom / cover no-repeat;
+}
+
+.plot-carousel::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
   background: rgba(255, 255, 255, 0.22);
-  /* backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px); */
 }
 
 .plot-carousel > * {
@@ -316,4 +320,3 @@
   flex: 1;
   pointer-events: auto;
 }
-

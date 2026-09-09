@@ -34,7 +34,6 @@ const NewPlot = () =>{
     const updatedPlot = {... plot, ["latitude"]:latitude, ["longitude"]:longitude}
     setPlot(updatedPlot)
     const data = await newPlot(updatedPlot)
-    console.log(data)
     navigate(`/plots`)
     }
     const getCurrentLocation = () =>{

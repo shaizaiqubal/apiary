@@ -45,12 +45,11 @@ async def unexpected_error_handler(request: Request, exc: Exception) -> JSONResp
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=['*'],
+    allow_origins=["http://localhost:5173"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 
 app.include_router(users.router)
 app.include_router(plot.router)

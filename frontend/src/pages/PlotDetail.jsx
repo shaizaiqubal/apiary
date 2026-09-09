@@ -6,6 +6,11 @@ import SightingOverlay from "../components/SightingOverlay"
 import ProgressBar from "../components/ProgressBar"
 import "./PlotDetail.css"
 
+const toSentenceCase = (value) => {
+    const text = String(value || '').trim().toLowerCase()
+    return text ? text.charAt(0).toUpperCase() + text.slice(1) : text
+}
+
 const PlotDetail = () => {
 
     const { plotId } = useParams()
@@ -154,7 +159,7 @@ const PlotDetail = () => {
                     <ul className="plotdetail-log-list">
                         {activityLog.map((item) => (
                             <li key={item.id} className="plotdetail-log-item">
-                                <span className="plotdetail-log-item__label">{item.label}</span>
+                                <span className="plotdetail-log-item__label">{toSentenceCase(item.label)}</span>
                                 <span className="plotdetail-log-item__points">{item.points}</span>
                             </li>
                         ))}

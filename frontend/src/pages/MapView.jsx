@@ -25,6 +25,16 @@ const MapZoomControls = () => {
     )
 }
 
+const MapCenter = ({ center }) => {
+    const map = useMap()
+
+    useEffect(() => {
+        map.setView(center)
+    }, [center, map])
+
+    return null
+}
+
 
 const MapView = () => {
     const [plots,setPlots] = useState([])
@@ -63,6 +73,7 @@ const MapView = () => {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
 
                 <MapZoomControls />
+                <MapCenter center={center} />
 
                 {mapPlots.map((plot) => (
                     <Marker key={plot.id} position={[plot.latitude, plot.longitude]} icon={beePinIcon}>
