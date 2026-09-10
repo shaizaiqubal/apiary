@@ -57,15 +57,6 @@ const PlotCarousel = () => {
     if (isLoading){
         return <LoadingState routeName="plot carousel" />
     }
-    if (plots.length===0){
-        return(
-            <>
-            <p>You Have no plots yet! </p>
-            <Link to='/plot/new'>(+)</Link>
-            </>
-        )
-    }
-    
     return(
         <div className="plot-carousel">
             <div className="plot-carousel__viewport">
@@ -115,7 +106,7 @@ const PlotCarousel = () => {
                     </Link>
                     <div className="plot-carousel__nav-tooltip">Bee-dex</div>
                 </div>
-                <div className="plot-carousel__nav-caption">{selectedIndex + 1} of {plots.length} plots</div>
+                <div className="plot-carousel__nav-caption">{selectedIndex + 1} of {slides.length} plots</div>
                 <div className="plot-carousel__nav-section">
                     <Link to="/map" className="plot-carousel__nav-link plot-carousel__nav-link--right" aria-label="Go to map" title="Map">
                         <img src="/src/assets/globe.png" alt="Map" />

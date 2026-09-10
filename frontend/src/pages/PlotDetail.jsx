@@ -20,6 +20,13 @@ const PlotDetail = () => {
     const [showQuest, setShowQuest] = useState(false)
     const [showSighting, setShowSighting] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
+    const [questNotice, setQuestNotice] = useState(null)
+
+    useEffect(() => {
+        if (!questNotice) return undefined
+        const timeout = setTimeout(() => setQuestNotice(null), 5000)
+        return () => clearTimeout(timeout)
+    }, [questNotice])
 
     const fetchQuest = async() => {
         const data = await getQuest(plotId)
@@ -27,7 +34,11 @@ const PlotDetail = () => {
         setShowQuest(true)
     }
 
-    const handleQuestSubmitted = async () => {
+    const handleQuestSubmitted = async (response) => {
+        setQuestNotice({
+            type: 'success',
+            text: `Quest accepted: +${response.quest?.points_awarded ?? 0} points`,
+        })
         const data = await getPlot(plotId)
         setPlot(data)
         setShowQuest(false)
@@ -64,7 +75,7 @@ const PlotDetail = () => {
     const pointsToNext = nextThreshold === null ? 0 : Math.max(nextThreshold - (plot.points || 0), 0)
 
     const activityLog = [
-        ...(plot.quests ?? []).map((item) => ({
+        ...(plot.quests ?? []).filter((item) => item.points_awarded > 0).map((item) => ({
             id: item.id,
             label: item.plant_id ? (item.plant_name || `Plant ${item.plant_id}`) : (item.action || `Action ${item.action_id}`),
             points: `+${item.points_awarded}`,
@@ -78,6 +89,12 @@ const PlotDetail = () => {
 
     return(
         <div className="plotdetail-page">
+            {questNotice && (
+                <div className="quest-notice quest-notice--success" role="status">
+                    <span>{questNotice.text}</span>
+                    <button type="button" onClick={() => setQuestNotice(null)} aria-label="Dismiss notification">×</button>
+                </div>
+            )}
             <header className="plotdetail-header-card">
                 <div className="plotdetail-header-row">
                     <h1 className="plotdetail-title">{plot.plot_name}</h1>

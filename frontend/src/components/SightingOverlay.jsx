@@ -5,7 +5,7 @@ import "./SightingOverlay.css";
 const SightingSheet = ({ children, isMinimized, onMinimize, onClose }) => {
     return (
         <div className="sighting-overlay" role="dialog" aria-modal="true" aria-label="Bee sighting">
-            <button className="sighting-overlay__backdrop" type="button" onClick={onClose} aria-label="Close sighting overlay" />
+            <button className={`sighting-overlay__backdrop ${isMinimized ? "is-minimized" : ""}`} type="button" onClick={onClose} aria-label="Close sighting overlay" />
             <section className={`sighting-overlay__sheet ${isMinimized ? "is-minimized" : ""}`}>
                 <div className="sighting-overlay__header">
                     <div>
@@ -23,6 +23,28 @@ const SightingSheet = ({ children, isMinimized, onMinimize, onClose }) => {
         </div>
     )
 }
+
+const CandidateList = ({ candidates, selectedId, onSelect }) => (
+    <div className="sighting-overlay__candidates" aria-label="Possible bee species">
+        {candidates?.map((candidate) => (
+            <label className="sighting-overlay__candidate" key={candidate.species_id}>
+                <input
+                    type="radio"
+                    name="species_id"
+                    value={candidate.species_id}
+                    checked={selectedId === candidate.species_id}
+                    onChange={() => onSelect(candidate.species_id)}
+                    required
+                />
+                <span className="sighting-overlay__candidate-info">
+                    <strong>{candidate.common_name}</strong>
+                    <em>{candidate.species_name}</em>
+                </span>
+                <span className="sighting-overlay__confidence">{Math.round(candidate.confidence * 100)}%</span>
+            </label>
+        ))}
+    </div>
+)
 
 const SightingOverlay = ({ plotId, onClose }) =>{
     const [phase, setPhase] = useState("capture") //capture || confirm || result || loading
@@ -95,18 +117,7 @@ const SightingOverlay = ({ plotId, onClose }) =>{
                     <p className="sighting-overlay__prompt">What species do you think it is?</p>
                     {error && <p className="sighting-overlay__message sighting-overlay__message--error">{error}</p>}
 
-                    <p className="sighting-overlay__candidates">
-                        {JSON.stringify(candidates.candidates)}
-                    </p>
-
-                    <input
-                        className="sighting-overlay__input"
-                        type="number"
-                        value={speciesId ?? ""}
-                        onChange={(e) =>
-                            setSpeciesId(Number(e.target.value))
-                        } required
-                    />
+                    <CandidateList candidates={candidates.candidates} selectedId={speciesId} onSelect={setSpeciesId} />
 
                     <button className="sighting-overlay__action" type="submit">
                         Confirm
@@ -117,9 +128,26 @@ const SightingOverlay = ({ plotId, onClose }) =>{
     }
 
     if(phase==="result"){
+        const confirmedSpecies = candidates?.candidates?.find(
+            (candidate) => candidate.species_id === speciesId
+        )
         content = (
             <div className="sighting-overlay__result">
-                <p>{JSON.stringify(result)}</p>
+                <h3 className="sighting-overlay__result-title">Sighting confirmed</h3>
+                <div className="sighting-overlay__result-summary">
+                    <div className="sighting-overlay__result-row">
+                        <span>Points awarded</span>
+                        <strong>+{result?.points_awarded ?? 0}</strong>
+                    </div>
+                    <div className="sighting-overlay__result-row">
+                        <span>Species name</span>
+                        <strong>{confirmedSpecies?.species_name || "Unknown"}</strong>
+                    </div>
+                    <div className="sighting-overlay__result-row">
+                        <span>Common name</span>
+                        <strong>{confirmedSpecies?.common_name || "Unknown"}</strong>
+                    </div>
+                </div>
                 <button className="sighting-overlay__action" type="button" onClick={onClose}>
                     Dismiss
                 </button>

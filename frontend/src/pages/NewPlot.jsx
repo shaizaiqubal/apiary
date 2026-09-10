@@ -18,7 +18,7 @@ const NewPlot = () =>{
     const { name, value } = e.target
     setPlot({
         ...plot,
-        [name]: numericFields.includes(name) ? parseFloat(value) : value
+        [name]: numericFields.includes(name) && value !== '' ? parseFloat(value) : value
     })
     }
 
@@ -31,7 +31,12 @@ const NewPlot = () =>{
     setLocationError('')
     const latitude = parseFloat(coords[0])
     const longitude = parseFloat(coords[1])
-    const updatedPlot = {... plot, ["latitude"]:latitude, ["longitude"]:longitude}
+    const updatedPlot = {
+        ...plot,
+        latitude,
+        longitude,
+        area_sq_m: plot.area_sq_m === '' ? null : plot.area_sq_m,
+    }
     setPlot(updatedPlot)
     const data = await newPlot(updatedPlot)
     navigate(`/plots`)
