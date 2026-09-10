@@ -56,17 +56,13 @@ const PlotCarousel = () => {
     if (isLoading){
         return(<p>Loading....</p>)
     }
-    if (plots.length===0){
-        return(
-            <>
-            <p>You Have no plots yet! </p>
-            <Link to='/plot/new'>(+)</Link>
-            </>
-        )
-    }
-    
     return(
         <div className="plot-carousel">
+            <div className="plot-carousel__howto">
+                <Link className="plot-carousel__howto" to="/howto" aria-label="How to play" title="How to play?">
+                       <p>?</p>
+                </Link>
+            </div>
             <div className="plot-carousel__viewport">
                 <button type="button" className="plot-carousel__arrow plot-carousel__arrow--left" onClick={scrollPrev} aria-label="Previous plot">
                     <img src="/src/assets/arrow.png" alt="Previous" />
@@ -114,7 +110,7 @@ const PlotCarousel = () => {
                     </Link>
                     <div className="plot-carousel__nav-tooltip">Bee-dex</div>
                 </div>
-                <div className="plot-carousel__nav-caption">{selectedIndex + 1} of {plots.length} plots</div>
+                <div className="plot-carousel__nav-caption">{selectedIndex + 1} of {slides.length} plots</div>
                 <div className="plot-carousel__nav-section">
                     <Link to="/map" className="plot-carousel__nav-link plot-carousel__nav-link--right" aria-label="Go to map" title="Map">
                         <img src="/src/assets/globe.png" alt="Map" />

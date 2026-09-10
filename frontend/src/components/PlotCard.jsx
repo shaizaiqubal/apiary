@@ -28,7 +28,7 @@ const PlotCard = ({ plot }) => {
                 <span className="plot-card-points-next">{pointsToNext} to {nextMilestone}</span>
             </div>
             <ProgressBar milestone={milestone} points={plot.points} />
-            <p className="plot-card-type-badge">{plotMap[plot.plot_type]}</p>
+            <p className="plot-card-type-badge">{plot.milestone} / {plotMap[plot.plot_type]}</p>
             <Link to={`/plot/${plot.id}`} className="plot-card-link">
                 <img src={plotImage} alt={`${milestone} plot`} className="plot-card-image" />
             </Link>

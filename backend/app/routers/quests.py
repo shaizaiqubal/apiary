@@ -8,14 +8,14 @@ from backend.app.services.get_quests import get_plant_quests, get_nesting_quests
 from backend.app.routers.users import get_user_or_404
 from backend.app.services.verification import verify_quest
 from backend.app.services.image_validation import validate_image_content_type, validate_image_size
-from backend.schemas import QuestLogResponse, QuestOptionsSchema
+from backend.schemas import QuestLogResponse, QuestOptionsSchema, QuestSchema
 
 router = APIRouter(prefix='/quests',tags=["quests"])
 
 
 @router.post("", response_model=QuestLogResponse)
 async def log_quest(
-    plot_id: int = Form(...),
+    plot_id: str = Form(...),
     plant_id: int | None = Form(None),
     action_id: int | None = Form(None),
     photo: UploadFile = File(...),
@@ -51,7 +51,11 @@ async def log_quest(
 
         if plant_id:
             plant = db.execute(select(Plant).where(Plant.plant_id == plant_id)).scalar_one_or_none()
-            found = db.execute(select(Quest).where(Quest.plot_id==plot_id, Quest.plant_id==plant_id)).scalar_one_or_none()
+            found = db.execute(select(Quest).where(
+                Quest.plot_id == plot_id,
+                Quest.plant_id == plant_id,
+                Quest.verified_status == "verified",
+            )).scalar_one_or_none()
             if plant:
                 expected = f"planting {plant.common_name or plant.plant_name}"
                 if found:
@@ -62,7 +66,11 @@ async def log_quest(
                 raise HTTPException(status_code=404, detail="Plant not found")
         else:
             action = db.execute(select(Nesting).where(Nesting.action_id == action_id)).scalar_one_or_none()
-            found = db.execute(select(Quest).where(Quest.plot_id==plot_id, Quest.action_id==action_id)).scalar_one_or_none()
+            found = db.execute(select(Quest).where(
+                Quest.plot_id == plot_id,
+                Quest.action_id == action_id,
+                Quest.verified_status == "verified",
+            )).scalar_one_or_none()
 
             if action:
                 expected = action.action
@@ -81,27 +89,43 @@ async def log_quest(
         validate_image_size(image_bytes)
         result = verify_quest(image_bytes, content_type, expected)
 
+        if result["status"] != "verified":
+            return {"quest": None, "result": result}
+
+        awarded_points = points
         quest = Quest(
             plot_id=plot_id,
             plant_id=plant_id,
             action_id=action_id,
-            verified_status="verified" if result["status"] == "verified" else "rejected",
-            points_awarded=points if result["status"] == "verified" else 0,
+            verified_status="verified",
+            points_awarded=awarded_points,
         )
         db.add(quest)
 
-        if result["status"] == "verified":
-            plot.points += points
+        plot.points += awarded_points
 
         db.commit()
         db.refresh(quest)
         db.refresh(plot)
         update_milestone(plot_id, user_id, db)
 
-    return {"quest": quest, "result": result}
+    quest_response = QuestSchema(
+        id=quest.id,
+        plot_id=quest.plot_id,
+        plant_id=quest.plant_id,
+        action_id=quest.action_id,
+        date_completed=quest.date_completed,
+        photo_url=quest.photo_url,
+        verified_status=quest.verified_status,
+        points_awarded=quest.points_awarded,
+        plant_name=plant.common_name if plant_id else None,
+        action=action.action if action_id else None,
+    )
+
+    return {"quest": quest_response, "result": result}
 
 @router.get('/plot/{plot_id}', response_model=QuestOptionsSchema)
-def get_plot_quests(plot_id: int, user_id: str = Depends(get_current_user_id)) -> dict:
+def get_plot_quests(plot_id: str, user_id: str = Depends(get_current_user_id)) -> dict:
     with SessionLocal() as db:
         plot = db.execute(select(Plot).where(Plot.id == plot_id, Plot.user_id == user_id)).scalar_one_or_none()
         if plot is None:

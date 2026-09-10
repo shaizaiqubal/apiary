@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { logQuest } from "../api"
 
 const QuestCard = ({quest, plotId, onSubmitted}) => {
@@ -7,6 +7,14 @@ const QuestCard = ({quest, plotId, onSubmitted}) => {
     const [image, setImage] = useState()
     const [expandedSteps, setExpandedSteps] = useState(null)
     const [error, setError] = useState('')
+    const [isSubmitting, setIsSubmitting] = useState(false)
+    const [notice, setNotice] = useState(null)
+
+    useEffect(() => {
+        if (!notice) return undefined
+        const timeout = setTimeout(() => setNotice(null), 5000)
+        return () => clearTimeout(timeout)
+    }, [notice])
 
     const plantQuest = quest.plant_quest
     const nestingQuest = quest.nesting_quest
@@ -17,7 +25,12 @@ const QuestCard = ({quest, plotId, onSubmitted}) => {
 
     const handleSubmit = async(e) => {
         e.preventDefault()
+        if (!image) {
+            setError('Choose a photo before submitting.')
+            return
+        }
         setError('')
+        setIsSubmitting(true)
         const formData = new FormData()
         formData.append('plot_id', plotId)
         formData.append('photo', image)
@@ -29,15 +42,21 @@ const QuestCard = ({quest, plotId, onSubmitted}) => {
         }
 
         try {
-            await logQuest(formData)
+            const response = await logQuest(formData)
             setActive(null)
             setImage(null)
-            onSubmitted?.()
+            if (response.result?.status === 'verified') {
+                onSubmitted?.(response)
+            } else {
+                setNotice({ type: 'error', text: response.result?.reasoning || 'The image was rejected.' })
+            }
         } catch (requestError) {
             setError(
                 requestError.response?.data?.detail ||
                 'The quest could not be submitted.'
             )
+        } finally {
+            setIsSubmitting(false)
         }
     }
 
@@ -115,7 +134,9 @@ const QuestCard = ({quest, plotId, onSubmitted}) => {
                 <div className="plotdetail-quest-card__active-form">
                     {error && <p className="plotdetail-quest-card__error" role="alert">{error}</p>}
                     <input type="file" accept="image/*" onChange={handleFileChange} className="plotdetail-quest-card__file" />
-                    <button type="button" className="plotdetail-quest-card__submit" onClick={handleSubmit}>Submit photo</button>
+                    <button type="button" className="plotdetail-quest-card__submit" onClick={handleSubmit} disabled={isSubmitting}>
+                        {isSubmitting ? 'Processing photo…' : 'Submit photo'}
+                    </button>
                 </div>
             )}
         </div>
@@ -124,6 +145,12 @@ const QuestCard = ({quest, plotId, onSubmitted}) => {
 
     return (
         <>
+            {notice && (
+                <div className={`quest-notice quest-notice--${notice.type}`} role="status">
+                    <span>{notice.text}</span>
+                    <button type="button" onClick={() => setNotice(null)} aria-label="Dismiss notification">×</button>
+                </div>
+            )}
             {renderQuestCard({
                 type: 'plant',
                 title: 'Plant quest',
@@ -158,4 +185,3 @@ const QuestCard = ({quest, plotId, onSubmitted}) => {
     )
 }
 export default QuestCard
-

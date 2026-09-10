@@ -59,7 +59,7 @@ class NestingQuestSchema(BaseModel):
 
 
 class QuestOptionsSchema(BaseModel):
-    plot_id: int
+    plot_id: str
     plot_milestone: str
     plant_quest: PlantQuestSchema | None
     nesting_quest: NestingQuestSchema | None
@@ -69,7 +69,7 @@ class QuestSchema(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
     id: int
-    plot_id: int
+    plot_id: str
     plant_id: int | None
     action_id: int | None
     date_completed: date
@@ -81,7 +81,7 @@ class QuestSchema(BaseModel):
 
 
 class QuestLogResponse(BaseModel):
-    quest: QuestSchema
+    quest: QuestSchema | None
     result: dict
 
 
@@ -89,7 +89,7 @@ class SightingSchema(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
     id: str
-    plot_id: int
+    plot_id: str
     species_id: int | None
     latitude: float
     longitude: float
@@ -103,7 +103,7 @@ class SightingSchema(BaseModel):
 class PlotSchema(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
-    id: int
+    id: str
     user_id: str
     plot_name: str
     latitude: float

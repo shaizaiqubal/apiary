@@ -218,6 +218,32 @@
   transform: scaleX(-1);
 }
 
+.plot-carousel__howto {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 2px solid #30251d;
+  border-radius: 50%;
+  background: #f7eacc;
+  color: #30251d;
+  text-decoration: none;
+  box-shadow: 3px 3px 0 rgba(48, 37, 29, 0.3);
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.plot-carousel__howto:hover {
+  transform: translateY(-3px) rotate(-4deg);
+  background: #f4b942;
+  box-shadow: 5px 6px 0 rgba(48, 37, 29, 0.3);
+}
+
+.plot-carousel__howto p {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .plot-carousel__arrow {
     transition: none;

@@ -22,7 +22,11 @@ class CreatePlot(BaseModel):
 def create_plot(plot: CreatePlot, user_id: str = Depends(get_current_user_id)) -> Plot:
     with SessionLocal() as db:
         get_user_or_404(db, user_id)
+        plot_number = db.execute(
+            select(Plot.id).where(Plot.user_id == user_id)
+        ).all().__len__() + 1
         new_plot = Plot(
+            id=f"{user_id}{plot_number}",
             user_id=user_id,
             plot_name=plot.plot_name,
             latitude=plot.latitude,
@@ -77,7 +81,7 @@ def get_plot_map() -> list[dict]:
     ]
 
 @router.get('/{plot_id}',response_model=PlotSchema)
-def get_plot(plot_id: int, user_id: str = Depends(get_current_user_id)) -> Plot:
+def get_plot(plot_id: str, user_id: str = Depends(get_current_user_id)) -> Plot:
     with SessionLocal() as db:
         get_user_or_404(db, user_id)
 
@@ -101,4 +105,3 @@ def get_plot(plot_id: int, user_id: str = Depends(get_current_user_id)) -> Plot:
         )
 
     return res
-

@@ -397,6 +397,40 @@
   box-shadow: 3px 3px 0 rgba(43, 33, 24, 0.16);
 }
 
+.plotdetail-quest-card__submit:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.quest-notice {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: min(90vw, 520px);
+  padding: 11px 14px;
+  border: 2px solid #30251d;
+  border-radius: 8px;
+  transform: translateX(-50%);
+  box-shadow: 4px 4px 0 rgba(48, 37, 29, 0.25);
+  font-size: 0.68rem;
+  line-height: 1.4;
+}
+
+.quest-notice--success { background: #d8e7c4; color: #236d5d; }
+.quest-notice--error { background: #f4c6a8; color: #913636; }
+.quest-notice button {
+  margin-left: auto;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
 .plotdetail-sighting-button {
   width: 100%;
   margin-top: 20px;

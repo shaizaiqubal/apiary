@@ -180,6 +180,7 @@ def main():
         hero_plots = []
         for i, (milestone_name, _) in enumerate(milestones[:4]):
             plot = Plot(
+                id=f"{hero.id}{i + 1}",
                 user_id=hero.id,
                 plot_name=f"{milestone_name.title()} Plot",
                 latitude=jitter(HERO_BASE_LAT, HERO_JITTER),
@@ -221,6 +222,7 @@ def main():
             lat, lng = random_uk_coords()
             milestone_name, _ = random.choice(milestones)
             filler_plot = Plot(
+                id=f"{filler_user.id}1",
                 user_id=filler_user.id,
                 plot_name="Wild Plot",
                 latitude=lat,
