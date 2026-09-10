@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useRef } from "react"
 import { getBeedex, getUserBeedex } from "../api"
-import SpeciesCard from "../components/SpeciesCard"
+import SpeciesCard, { beeImageExtensions } from "../components/SpeciesCard"
 import "./Beedex.css"
 
 const Beedex = () => {
@@ -43,6 +43,12 @@ const Beedex = () => {
         fetchBeedex()
     }, [showUnlocked])
 
+    useEffect(() => {
+        if (!carouselRef.current) return
+        carouselRef.current.scrollTo({ top: 0, behavior: "auto" })
+        setSelectedIndex(0)
+    }, [sortMode, showUnlocked])
+
     const handleCarouselScroll = () => {
         const viewport = carouselRef.current
         if (!viewport) return
@@ -61,7 +67,6 @@ const Beedex = () => {
         setSortMode(event.target.value)
         setSelectedIndex(0)
         setSelectedBee(null)
-        carouselRef.current?.scrollTo({ top: 0, behavior: "smooth" })
     }
 
     useEffect(() => {
@@ -134,7 +139,7 @@ const Beedex = () => {
                             <div className="beedex-modal__image-wrap">
                                 <img
                                     className="beedex-modal__image"
-                                    src={`/bees/${selectedBee.species.species_id}.${({1: "png", 2: "JPG", 3: "jpg", 4: "jpg", 5: "jpg", 6: "jpg", 7: "jpg", 8: "jpg", 9: "webp", 10: "jpg"})[selectedBee.species.species_id] || "png"}`}
+                                    src={`/bees/${selectedBee.species.species_id}.${beeImageExtensions[selectedBee.species.species_id] || "png"}`}
                                     alt={selectedBee.species.common_name}
                                     onError={(event) => {
                                         if (event.currentTarget.dataset.fallback) return

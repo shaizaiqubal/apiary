@@ -8,21 +8,6 @@ Creates demo data for Apiary so the app has something to show on first load:
   species (a "natural" rarity distribution)
 - 5 extra plots owned by fresh random users, scattered across the UK, just
   so the community map isn't empty
-
-ASSUMPTIONS - check these against your real conventions and adjust if wrong:
-  - plants / nestings / species / plot_milestones are already loaded from
-    the real CSVs (via csv_loader.py or similar). This script only reads
-    them; it never invents plant, action, or species rows.
-  - sun_shade values are one of: "full_sun", "partial_shade", "full_shade"
-  - plot_type is a small int code (1-3) — there's no enum in models.py yet,
-    so this is a placeholder. Swap PLOT_TYPES below for your real codes.
-  - If plot_milestones is empty, falls back to Seedling/Garden/Habitat/
-    Sanctuary at 0/500/1250/2500 cumulative points.
-
-Run from your project root, e.g.:
-    python -m backend.seed_data
-(adjust the import paths below if seed_data.py doesn't live next to
-csv_loader.py / models.py / database.py)
 """
 
 import random
@@ -52,9 +37,9 @@ HERO_BASE_LAT = 51.4545
 HERO_BASE_LNG = -2.5879
 HERO_JITTER = 0.01  # roughly a 1-2km spread
 
-# Rough bounding box for scattering the filler plots across mainland UK
-UK_LAT_RANGE = (50.0, 58.5)
-UK_LNG_RANGE = (-6.5, 1.5)
+# Filler plots stay near the hero plots so the seeded map feels like one
+# connected local area.
+FILLER_JITTER = 0.025
 
 # Bias for the 7-species Bee-dex pull: common bees show up far more than
 # specialists, matching how you'd actually expect sightings to land.
@@ -67,13 +52,17 @@ RARITY_WEIGHTS = {
 
 FILLER_PLOT_COUNT = 5
 
+PLOT_NAMES = ["My Little Patch", "Bramble bed", "Wildflower row", "Our green corner", "Sunday Garden", "Window ledge", "Home Patch", "herb n honey", "The spare corner"]
+
+def get_plot_name():
+    if not PLOT_NAMES:
+        return None
+    name = random.choice(PLOT_NAMES)
+    PLOT_NAMES.remove(name)
+    return name
 
 def jitter(base, spread):
     return base + random.uniform(-spread, spread)
-
-
-def random_uk_coords():
-    return random.uniform(*UK_LAT_RANGE), random.uniform(*UK_LNG_RANGE)
 
 
 def get_milestones(db):
@@ -182,7 +171,7 @@ def main():
             plot = Plot(
                 id=f"{hero.id}{i + 1}",
                 user_id=hero.id,
-                plot_name=f"{milestone_name.title()} Plot",
+                plot_name=f"{get_plot_name() or "My Plot"}",
                 latitude=jitter(HERO_BASE_LAT, HERO_JITTER),
                 longitude=jitter(HERO_BASE_LNG, HERO_JITTER),
                 sun_shade=random.choice(SUN_SHADE_OPTIONS),
@@ -219,12 +208,13 @@ def main():
             db.add(filler_user)
             db.flush()
 
-            lat, lng = random_uk_coords()
+            lat = jitter(HERO_BASE_LAT, FILLER_JITTER)
+            lng = jitter(HERO_BASE_LNG, FILLER_JITTER)
             milestone_name, _ = random.choice(milestones)
             filler_plot = Plot(
                 id=f"{filler_user.id}1",
                 user_id=filler_user.id,
-                plot_name="Wild Plot",
+                plot_name=f"{get_plot_name() or "My Plot"}",
                 latitude=lat,
                 longitude=lng,
                 sun_shade=random.choice(SUN_SHADE_OPTIONS),
@@ -236,7 +226,7 @@ def main():
             db.add(filler_plot)
 
         db.commit()
-        print(f"Added {FILLER_PLOT_COUNT} filler plots scattered across the UK.")
+        print(f"Added {FILLER_PLOT_COUNT} filler plots near the hero plots.")
 
     print("Done.")
 
