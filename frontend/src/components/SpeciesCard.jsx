@@ -1,11 +1,8 @@
-const beeImageExtensions = { 1: 'png', 2: 'JPG', 3: 'jpg', 4: 'jpg', 5: 'jpg', 6: 'jpg', 7: 'jpg', 8: 'jpg', 9: 'webp', 10: 'jpg' }
-
-const SpeciesCard = ({species, number, discovered, onSelect}) => {
+const SpeciesCard = ({species, number, onSelect}) => {
     const rarity = String(species.rarity_tier || "Common").toLowerCase()
-    const imagePath = `/bees/${species.species_id}.${beeImageExtensions[species.species_id] || 'png'}`
 
     return(
-        <article className={`species-card species-card--${rarity}${discovered ? " species-card--discovered" : " species-card--undiscovered"}`} onClick={onSelect} onKeyDown={(event) => event.key === "Enter" && onSelect?.()} role="button" tabIndex="0" aria-label={`Open details for ${species.common_name}`}>
+        <article className={`species-card species-card--${rarity}`} onClick={onSelect} onKeyDown={(event) => event.key === "Enter" && onSelect?.()} role="button" tabIndex="0" aria-label={`Open details for ${species.common_name}`}>
             <div className="species-card__topline">
                 <span className="species-card__number">#{String(number).padStart(2, "0")}</span>
                 <span className={`species-card__rarity species-card__rarity--${species.rarity_tier.toLowerCase()}`}>
@@ -15,13 +12,9 @@ const SpeciesCard = ({species, number, discovered, onSelect}) => {
             <div className="species-card__illustration" aria-hidden="true">
                 <img
                     className="species-card__image"
-                    src={imagePath}
+                    src={species.latest_image?.url || "/bees/default-bee.jpg"}
                     alt=""
-                    onError={(event) => {
-                        if (event.currentTarget.dataset.fallback) return
-                        event.currentTarget.dataset.fallback = "true"
-                        event.currentTarget.src = "/bees/default-bee.jpg"
-                    }}
+                    onError={(event) => { event.currentTarget.hidden = true }}
                 />
                 <span className="species-card__bee">BEE</span>
             </div>

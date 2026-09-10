@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react'
 import { getPlots , getMap} from '../api'
 import { Link } from 'react-router-dom'
 import beePin from '../assets/beepin.png'
-import LoadingState from '../components/LoadingState'
 import './MapView.css'
 
 const beePinIcon = new Icon({
@@ -40,25 +39,26 @@ const MapCenter = ({ center }) => {
 const MapView = () => {
     const [plots,setPlots] = useState([])
     const [mapPlots,setMapPlots] = useState([])
-    const [isLoading, setIsLoading] = useState(true)
     const plotMap = {1:'Balcony pot',2:'Small garden',3:'Large garden',4:'Allotment'}
 
     useEffect(() => {
-        const fetchMapData = async() => {
-            const [plotData, mapData] = await Promise.all([getPlots(), getMap()])
-            setPlots(plotData)
-            setMapPlots(mapData)
-            setIsLoading(false)
+        const fetchPlots = async() => {
+            const data = await getPlots()
+            setPlots(data)
         }
-        fetchMapData()
+        fetchPlots()
     }, [])
 
     const center = plots.length > 0
                 ? [plots[0].latitude, plots[0].longitude]
                 : [51.505, -0.09] 
-    if (isLoading) {
-        return <LoadingState routeName="map" />
-    }
+    useEffect(() => {
+        const fetchMap = async() => {
+            const data = await getMap()
+            setMapPlots(data)
+        }
+        fetchMap()
+    }, [])
 
     return(
        <main className="mapview-page">
