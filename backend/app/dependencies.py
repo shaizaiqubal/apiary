@@ -27,7 +27,7 @@ def get_current_user_id(x_user_id: str | None = Header(default=None, alias="X-Us
 
     
 
-def update_milestone(plot_id: int, user_id: str, db) -> bool:
+def update_milestone(plot_id: str, user_id: str, db) -> bool:
 
     plot = db.execute(
         select(Plot).where(Plot.id == plot_id, Plot.user_id == user_id)

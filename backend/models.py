@@ -84,7 +84,7 @@ class User(Base):
 class Plot(Base):
     __tablename__ = "plots"
 
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    id: Mapped[str] = mapped_column(String, primary_key=True)
     user_id: Mapped[str] = mapped_column(String, ForeignKey("users.id"), nullable=False)
     plot_name: Mapped[str] = mapped_column(String)
 
@@ -108,7 +108,7 @@ class Quest(Base):
     __tablename__ = "quests"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-    plot_id: Mapped[int] = mapped_column(Integer, ForeignKey("plots.id"), nullable=False)
+    plot_id: Mapped[str] = mapped_column(String, ForeignKey("plots.id"), nullable=False)
 
     # Exactly one of these should be set
     plant_id: Mapped[int | None] = mapped_column(Integer, ForeignKey("plants.plant_id"), nullable=True)
@@ -136,7 +136,7 @@ class Sighting(Base):
     __tablename__ = "sightings"
 
     id: Mapped[str] = mapped_column(String, primary_key=True,)
-    plot_id: Mapped[int] = mapped_column(Integer, ForeignKey("plots.id"), nullable=False)
+    plot_id: Mapped[str] = mapped_column(String, ForeignKey("plots.id"), nullable=False)
     species_id: Mapped[int | None] = mapped_column(Integer, ForeignKey("species.species_id"), nullable=True)
 
     image_hash: Mapped[str] = mapped_column(String)
