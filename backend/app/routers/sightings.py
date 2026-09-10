@@ -16,7 +16,7 @@ router = APIRouter(prefix="/sightings", tags=["sightings"])
 
 @router.post("")
 async def post_sightings(
-    plot_id: int = Form(...),
+    plot_id: str = Form(...),
     user_id: str = Depends(get_current_user_id),
     photo: UploadFile = File(...),
 ) -> dict:
