@@ -17,7 +17,7 @@
   inset: -24px;
   z-index: -2;
   background: url('../assets/carousel.jpeg') center / cover no-repeat;
-  filter: blur(8px);
+  filter: blur(2px);
   transform: scale(1.04);
 }
 
@@ -52,7 +52,7 @@
   margin: 2.5rem auto 0.75rem;
   padding-bottom: 0.35rem;
   border-bottom: 2px solid rgba(48, 37, 29, 0.35);
-  color: #236d5d;
+  color: black;
   font-size: 1.1rem;
 }
 
