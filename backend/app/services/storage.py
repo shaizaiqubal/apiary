@@ -44,6 +44,15 @@ def upload_image(image_bytes: bytes, object_name: str, content_type: str) -> str
         raise StorageServiceError("Image storage is temporarily unavailable") from exc
 
 
+def delete_image(object_name: str) -> None:
+    if bucket is None:
+        return
+    try:
+        bucket.blob(object_name).delete()
+    except Exception:
+        logger.warning("Unable to clean up image %s", object_name, exc_info=True)
+
+
 def get_signed_image_url(object_name: str) -> str | None:
     if bucket is None or not SIGNING_SERVICE_ACCOUNT_EMAIL:
         logger.error("GCP signed URL generation unavailable: missing bucket or signing service account configuration")
