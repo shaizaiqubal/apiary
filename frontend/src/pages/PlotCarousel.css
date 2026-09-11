@@ -146,7 +146,6 @@
   width: min(380px, 70%);
   height: auto;
   object-fit: contain;
-  filter:drop-shadow(0 16px 22px rgba(48, 37, 29, 0.22));
   animation: float-bob 2.5s ease-in-out infinite;
 }
 
@@ -218,46 +217,6 @@
   transform: scaleX(-1);
 }
 
-.plot-carousel__howto {
-  position: absolute;
-  top: 1.5rem;
-  right: 1rem;
-  z-index: 2;
-  width: 42px;
-  height: 42px;
-  text-shadow: 2px 2px 0 #397cbf;
-  color: #B5DCF0;
-  text-decoration: none;
-  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease; 
-}
-
-.plot-carousel__howto-tooltip {
-  position: absolute;
-  top: 24px;
-  left: -80px;
-  transform: translateX(-50%);
-  font-size: 0.75rem;
-  color: rgba(31, 31, 31, 0.6);
-  white-space: nowrap;
-  text-shadow: none;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s ease;
-}
-.plot-carousel__howto:hover .plot-carousel__howto-tooltip {
-  opacity: 1;
-}
-
-.plot-carousel__howto:hover {
-  color: #fff6cf;
-  transform: translateY(-5px) ;
-}
-
-.plot-carousel__howto p {
-  margin: 0;
-  font-size: 1.5rem;
-  font-weight: 700;
-}
 
 @media (prefers-reduced-motion: reduce) {
   .plot-carousel__arrow {
@@ -360,4 +319,38 @@
   text-align: center;
   flex: 1;
   pointer-events: auto;
+}
+
+@media (max-width: 768px) {
+
+
+  .plot-carousel__arrow {
+    display: none;
+  }
+
+  .plot-carousel__viewport {
+    width: 100%;
+  }
+
+  .embla {
+    width: 100%;
+  }
+
+  .plot-card {
+    min-height: 540px;
+  }
+
+  .plot-card-image {
+    width: min(520px, 92vw);
+  }
+
+  .plot-carousel__nav-link {
+    width: 44px;
+    height: 44px;
+  }
+
+  .plot-carousel__nav-link img {
+    width: 72px;
+    height: 72px;
+  }
 }

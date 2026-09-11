@@ -7,7 +7,6 @@ import MapView from './pages/MapView'
 import NewPlot from './pages/NewPlot'
 import PlotCarousel from './pages/PlotCarousel'
 import PlotDetail from './pages/PlotDetail'
-import HowTo from './pages/HowTo'
 import { playClickSound } from './audio'
 
 import './App.css'
@@ -33,7 +32,6 @@ function App() {
       <Route path ="/plots" element= {<PlotCarousel/>} />
       <Route path ="/plot/new" element= {<NewPlot/>} />
       <Route path ="/plot/:plotId" element= {<PlotDetail/>} />
-      <Route path ="/howto" element= {<HowTo/>} />
     </Routes>
   </BrowserRouter>
   

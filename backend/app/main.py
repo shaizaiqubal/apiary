@@ -3,13 +3,21 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi import Request
 from fastapi.responses import JSONResponse
 from contextlib import asynccontextmanager
+from dotenv import load_dotenv
 import logging
+import os
+
+load_dotenv()
+
+FRONTEND_URL = os.getenv("FRONTEND_URL")
+
+logger = logging.getLogger(__name__)
+
 
 from backend.database import Base,engine
 from backend.app.routers import beedex, quests, sightings, users, plot
 from backend.app.errors import ServiceError
 
-logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -42,10 +50,13 @@ async def unexpected_error_handler(request: Request, exc: Exception) -> JSONResp
         },
     )
 
+origins = ["http://localhost:5173"]
+if FRONTEND_URL:
+    origins.append(FRONTEND_URL)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

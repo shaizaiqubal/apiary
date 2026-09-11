@@ -38,7 +38,7 @@ const NewPlot = () =>{
         area_sq_m: plot.area_sq_m === '' ? null : plot.area_sq_m,
     }
     setPlot(updatedPlot)
-    const data = await newPlot(updatedPlot)
+    await newPlot(updatedPlot)
     navigate(`/plots`)
     }
     const getCurrentLocation = () =>{

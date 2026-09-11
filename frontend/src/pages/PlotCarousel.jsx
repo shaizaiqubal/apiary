@@ -59,12 +59,6 @@ const PlotCarousel = () => {
     }
     return(
         <div className="plot-carousel">
-            <div className="plot-carousel__howto">
-                <Link className="plot-carousel__howto" to="/howto" aria-label="How to play" title="How to play?">
-                       <p>?</p>
-                </Link>
-                <span className="plot-carousel__howto-tooltip">How to play?</span>
-            </div>
             <div className="plot-carousel__viewport">
                 <button type="button" className="plot-carousel__arrow plot-carousel__arrow--left" onClick={scrollPrev} aria-label="Previous plot">
                     <img src="/src/assets/arrow.png" alt="Previous" />

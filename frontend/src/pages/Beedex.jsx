@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import { useRef } from "react"
 import { getBeedex, getUserBeedex } from "../api"
-import SpeciesCard, { beeImageExtensions } from "../components/SpeciesCard"
+import SpeciesCard from "../components/SpeciesCard"
+import { beeImageExtensions } from "../utils/beeImages"
 import "./Beedex.css"
 
 const Beedex = () => {

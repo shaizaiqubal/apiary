@@ -173,12 +173,12 @@ user_id: str = Depends(get_current_user_id)) -> SightingSchema:
         sighting.species = species
         sighting.verified_status = "confirmed"
 
-        plot = db.execute(
-            select(Plot).where(
-                Plot.id == sighting.plot_id,
-                Plot.user_id == user_id,
-            )
-        ).scalar_one_or_none()
+        # plot = db.execute(
+        #     select(Plot).where(
+        #         Plot.id == sighting.plot_id,
+        #         Plot.user_id == user_id,
+        #     )
+        # ).scalar_one_or_none()
         if not plot:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
