@@ -7,3 +7,5 @@ python-dotenv==1.2.3
 python-multipart==0.0.32
 SQLAlchemy==2.0.52
 uvicorn==0.52.3
+google-cloud-storage
+google-auth
