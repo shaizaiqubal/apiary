@@ -72,7 +72,6 @@
   justify-content: center;
   text-align: center;
   width: 100%;
-  padding: 2.25rem;
 }
 
 .plot-card-name {
@@ -323,7 +322,10 @@
 
 @media (max-width: 768px) {
 
-
+  .plot-card-name{
+    font-size: 1.2rem;
+  }
+  
   .plot-carousel__arrow {
     display: none;
   }

@@ -2,7 +2,16 @@ import { Link } from "react-router-dom"
 import ProgressBar from './ProgressBar'
 import { getProgressToNextMilestone, MILESTONE_THRESHOLDS } from '../utils/milestones'
 import seedlingImage from '../assets/seedling.png'
+import gardenImage from '../assets/garden.png'
+import habitatImage from '../assets/habitat.png'
 import sanctuaryImage from '../assets/sanctuary.png'
+
+const milestoneImages = {
+    Seedling: seedlingImage,
+    Garden: gardenImage,
+    Habitat: habitatImage,
+    Sanctuary: sanctuaryImage,
+}
 
 const PlotCard = ({ plot }) => {
     const plotMap = {1:'balcony pot',2:'small garden',3:'large garden',4:'allotment'}
@@ -10,11 +19,7 @@ const PlotCard = ({ plot }) => {
     const currentPoints = Number(plot.points) || 0
     const normalizedMilestone = String(plot.milestone || 'Seedling').trim().toLowerCase()
     const milestone = normalizedMilestone.charAt(0).toUpperCase() + normalizedMilestone.slice(1)
-    const plotImage = milestone === 'Seedling'
-        ? seedlingImage
-        : milestone === 'Sanctuary'
-            ? sanctuaryImage
-            : seedlingImage
+    const plotImage = milestoneImages[milestone] || seedlingImage
     const threshold = MILESTONE_THRESHOLDS[milestone]
     const nextMilestone = Object.keys(MILESTONE_THRESHOLDS).find(m => 
         threshold && MILESTONE_THRESHOLDS[m].lower === threshold.upper

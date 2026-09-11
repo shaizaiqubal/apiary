@@ -11,6 +11,13 @@ api.interceptors.request.use((config) => {
   return config
 })
 
+export const validateUser = async () => {
+    const apiaryUuid = localStorage.getItem('apiary_uuid')
+
+    const response = await api.get(`/users/${apiaryUuid}`)
+    return response.data
+}
+
 export const registerUser = async() => {
     const response = await api.post(`/users/register`)
     return response.data

@@ -115,6 +115,7 @@
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1rem;
   touch-action: pan-y;
+  margin-bottom: 3rem;
 }
 
 .beedex-carousel__slide {
