@@ -1,14 +1,11 @@
 <p align="center">
   <img src="assets/logo.png" alt="Apiary logo" width="500">
 </p>
-
-<p align="center"><strong>Plant something real</strong></p>
+<p align="center"><strong><em>Plant something real</em></strong></p>
 
 <p align="center"><em>Built for AnimalHack 2026</em></p>
 
 ---
-
-
 
 ## About the name
 
@@ -31,7 +28,7 @@ You don't need the map for the game to make sense. It's there because a scattere
 Nothing in here is simulated. The plants are real plants. The soil is your actual soil, and the bees, when they turn up, are real bees having a look at what you made.
 
 
-> There's a quieter side effect to all this too. Every confirmed sighting is a real, checked record: a species, a location, a date and a photo. That's the same basic material bee recording schemes like BWARS run on, and every plot playing Apiary adds to it without anyone having to go out and run a formal survey.
+> There's a quieter side effect to all this too. Every confirmed sighting is a real, checked record: a species, a location, a date and a photo. That's the same basic material bee recording schemes like BWARS run on, and every plot playing Apiary adds to it without anyone having to go out and run a formal survey. The game slowly builds up its own dataset
 
 
 ## Why wild bees specifically
@@ -83,5 +80,5 @@ None of that needs a grand fix. It mostly needs small, unglamorous things done i
 | **Vision**   | Two-tier LLM vision pipeline. Tier one verifies that a submitted photo plausibly matches the claimed planting or nesting action. Tier two handles species ID on sighting photos, returning the top 2–3 candidates for user confirmation rather than making a single automated call.             |
 | **Data**     | `plants` (RHS Plants for Pollinators IDs and hardiness ratings, ~53 rows), `species` (30 UK wild bee species and rarity tiers), `nesting_actions`, and a `plant_species` junction table. Region bucketing uses latitude bands mapped to USDA hardiness zone equivalents, with no geocoding API. |
 
-*For more details, check out [Architecture.md](Architecture.md).*
+*For more details, check out [ARCHITECTURE.md](ARCHITECTURE.md).*
 
