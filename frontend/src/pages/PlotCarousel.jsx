@@ -61,7 +61,7 @@ const PlotCarousel = () => {
         <div className="plot-carousel">
             <div className="plot-carousel__viewport">
                 <button type="button" className="plot-carousel__arrow plot-carousel__arrow--left" onClick={scrollPrev} aria-label="Previous plot">
-                    <img src="/src/assets/arrow.png" alt="Previous" />
+                    <img src="/arrow.png" alt="Previous" />
                 </button>
 
                 <div className="embla" ref={emblaRef}>
@@ -83,7 +83,7 @@ const PlotCarousel = () => {
                 </div>
 
                 <button type="button" className="plot-carousel__arrow plot-carousel__arrow--right" onClick={scrollNext} aria-label="Next plot">
-                    <img src="/src/assets/arrow.png" alt="Next" />
+                    <img src="/arrow.png" alt="Next" />
                 </button>
             </div>
 
@@ -102,14 +102,14 @@ const PlotCarousel = () => {
             <div className="plot-carousel__nav">
                 <div className="plot-carousel__nav-section">
                     <Link to="/beedex" className="plot-carousel__nav-link plot-carousel__nav-link--left" aria-label="Go to Beedex" title="Bee-dex">
-                        <img src="/src/assets/pokedex.png" alt="Beedex" />
+                        <img src="/pokedex.png" alt="Beedex" />
                     </Link>
                     <div className="plot-carousel__nav-tooltip">Bee-dex</div>
                 </div>
                 <div className="plot-carousel__nav-caption">{selectedIndex + 1} of {slides.length} plots</div>
                 <div className="plot-carousel__nav-section">
                     <Link to="/map" className="plot-carousel__nav-link plot-carousel__nav-link--right" aria-label="Go to map" title="Map">
-                        <img src="/src/assets/globe.png" alt="Map" />
+                        <img src="/globe.png" alt="Map" />
                     </Link>
                     <div className="plot-carousel__nav-tooltip">Map</div>
                 </div>

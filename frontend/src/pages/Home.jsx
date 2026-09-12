@@ -7,7 +7,7 @@ import './Home.css'
 const HomePage = () => {
     return(
         <div className="home-page">
-        <img src="/src/assets/logo.png" alt="APIARY logo" className="home-logo" />
+        <img src="/logo.png" alt="APIARY logo" className="home-logo" />
         <Link to='/plots' className="home-action-link">Go to Plots</Link>
         <span className="home-credit">AnimalHack 2026</span>
         </div>
@@ -32,7 +32,7 @@ const RegisterPage = () => {
     }
     return(
         <div className="register-page">
-        <img src="/src/assets/logo.png" alt="APIARY logo" className="home-logo" />
+        <img src="/logo.png" alt="APIARY logo" className="home-logo" />
         <p>It looks like you have no plots yet!</p>
         {error && <p className="home-register-error" role="alert">{error}</p>}
         <button onClick={registerNewUser} className="home-action-button" type="button">

@@ -11,7 +11,7 @@ const LocationPicker = ({ coords, setCoords }) => {
             map.setView(coords)
         }
     },[coords,map])
-    return coords ? <Marker position={coords} /> : null
+    return coords 
 }
 
 export default LocationPicker

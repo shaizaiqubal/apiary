@@ -1,9 +1,20 @@
 import { useState } from "react"
 import { newPlot } from "../api"
 import { useNavigate } from "react-router-dom"
-import { MapContainer, TileLayer } from "react-leaflet"
+import { MapContainer, TileLayer, Marker } from "react-leaflet"
 import LocationPicker from "../components/LocationPicker"
+import beePin from '../assets/beepin.png'
 import "./NewPlot.css"
+import L from 'leaflet'
+
+const beePinIcon = new L.Icon({
+    iconUrl: beePin,
+    iconSize: [56, 56],
+    iconAnchor: [28, 28],
+    popupAnchor: [0, -28],
+    className: "mapview-bee-pin",
+})
+ 
 
 const NewPlot = () =>{
     const [plot, setPlot] = useState({plot_name:'', latitude:'', longitude: '', sun_shade:'', plot_type: '', area_sq_m:''})
@@ -79,6 +90,11 @@ const NewPlot = () =>{
                         <MapContainer center={[51.505, -0.09]} zoom={13} className="newplot-map">
                             <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
                             <LocationPicker coords={coords} setCoords={setCoords}/>
+
+                            {coords && 
+                                (<Marker position={coords} icon={beePinIcon} />)
+                            }
+                            
                         </MapContainer>
                     </div>
                     <div className="newplot-map-footer">
