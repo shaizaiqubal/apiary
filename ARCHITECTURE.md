@@ -5,14 +5,14 @@
 Apiary is a React/FastAPI game for recording pollinator-friendly gardening actions and bee sightings. Users create plots, complete verified quests, record bee sightings, earn points, and progress through four plot milestones.
 
 ```text
-Browser
+Browser (Vercel)
   │ Axios / REST
   ▼
-React + Vite :5173
+React + Vite 
   │ X-User-ID header
   ▼
-FastAPI :8000
-  ├── PostgreSQL via SQLAlchemy
+FastAPI (Google Cloud Run)
+  ├── PostgreSQL (Render) via SQLAlchemy
   ├── Gemini image verification
   └── Google Cloud Storage for sighting images
 ```

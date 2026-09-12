@@ -30,7 +30,15 @@
   background: rgba(255, 249, 231, 0.22);
   box-shadow: 5px 5px 0 rgba(48, 37, 29, 0.24), 0 10px 22px rgba(48, 37, 29, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Fallback for Safari/iOS wrapped separately */
+@supports (-webkit-backdrop-filter: blur(1px)) {
+  .mapview-overlay,
+  .mapview-zoom-controls {
+     backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
 }
 
 .mapview-overlay {

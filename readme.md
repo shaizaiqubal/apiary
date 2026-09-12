@@ -4,6 +4,7 @@
 <p align="center"><strong><em>Plant something real</em></strong></p>
 
 <p align="center"><em>Built for AnimalHack 2026</em></p>
+<p align="center"><a href="https://apiary-ochre.vercel.app/"><img src="assets/play.png" width="200"></a></p>
 
 ---
 
@@ -28,7 +29,13 @@ You don't need the map for the game to make sense. It's there because a scattere
 Nothing in here is simulated. The plants are real plants. The soil is your actual soil, and the bees, when they turn up, are real bees having a look at what you made.
 
 
-> There's a quieter side effect to all this too. Every confirmed sighting is a real, checked record: a species, a location, a date and a photo. That's the same basic material bee recording schemes like BWARS run on, and every plot playing Apiary adds to it without anyone having to go out and run a formal survey. The game slowly builds up its own dataset
+## Cool features
+ 
+- **No signup.** Open the app and you're already playing. Your plot is tied to your device, not an account you had to make.
+- **A shortlist, not a verdict.** When a bee shows up in a photo, the app suggests two or three likely species and asks you to make the final call, instead of pretending to be sure of something it isn't.
+- **Every Bee-dex card is a real photograph.** Locked entries aren't just blank. They show up as a shadow of themselves, a hint at what's still out there for you to find.
+- **No plot is too small.** Progression is built so even a balcony box can reach Sanctuary tier too, just through a different set of actions than someone with a full garden.
+- **Every confirmed sighting becomes real data.** Each one is a checked record: a species, a location, a date. That's the same basic material bee recording schemes like BWARS run on, and every plot playing Apiary adds to it without anyone having to go run a formal survey.
 
 
 ## Why wild bees specifically
@@ -37,9 +44,9 @@ Say "bee" to most people and they picture a hive: a queen, worker bees, honey. T
 
 They're also carrying more of the pollination workload than people assume. Honeybees kept in managed hives cover only a fraction of UK crop pollination; wild bees and their relatives handle the rest. And they're not doing brilliantly: Britain has lost most of its wildflower meadows since the 1930s, and well over a quarter of British wild bee species are declining over the long term.
 
-None of that needs a grand fix. It mostly needs small, unglamorous things done in lots of gardens at once: a bit of bare soil left alone, the right flower in the right spot, a pile of brush nobody tidies away. Apiary exists to make those things into a habit instead of a good intention.
+None of that needs a grand fix. It mostly needs small, unglamorous things done in lots of gardens at once: a bit of bare soil left alone, the right flower in the right spot, a pile of leaves nobody tidies away. Apiary exists to make those things into a habit.
 
-*None of this is a UK-only story.* Roughly 40 percent of the world's insect pollinators, bees among them, are considered at risk of extinction, and the decline shows up in bee records pulled from pretty much everywhere researchers have looked, not just the well-studied corners of Europe and North America. We started with the UK because the data existed to build this properly: RHS Plants for Pollinators and BWARS give detailed, evidence-based lists of which plants actually help which bees, region by region, and that combination is hard to find anywhere else in one place. Swap in a different region's list of pollinator-friendly plants and local bee species, and the same plot and quest logic runs there too. The UK is just where we started.
+> *None of this is a UK-only story.* Roughly 40 percent of the world's insect pollinators, bees among them, are considered at risk of extinction, and the decline shows up in bee records pulled from pretty much everywhere researchers have looked, not just the well-studied corners of Europe and North America. We started with the UK because the data existed to build this properly: RHS Plants for Pollinators and BWARS give detailed, evidence-based lists of which plants actually help which bees, region by region, and that combination is hard to find anywhere else in one place. Swap in a different region's list of pollinator-friendly plants and local bee species, and the same plot and quest logic runs there too. The UK is just where we started.
 
 
 ## Screenshots
@@ -64,13 +71,13 @@ None of that needs a grand fix. It mostly needs small, unglamorous things done i
 ### Field Map
 ![Field map](assets/map.png)
 
-## Try it out
+ 
+## Privacy and Storage
+> Photos you submit specifically to the sightings, i.e, the bee photos, are stored, along with the location and time attached to them, into the private shared dataset described above. All photos are also sent to Google's Gemini API for species identification. No account, email, or name is ever attached to any of it, only a user ID.
+ 
+**Live demo:** [Try it out here](https://apiary-ochre.vercel.app/)
 
-[link: live demo]
-
-[link: demo video]
-
-## How it's built
+## How it's built 
 
 | Area         | Technology / Approach  |
 | ------------ | -------------------------------------------------------------------------------------- |
